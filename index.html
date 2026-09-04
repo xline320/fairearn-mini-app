@@ -1,382 +1,680 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bn">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FairEarn Bot ⭐</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FairEarn Bot ⭐</title>
 
-  <!-- Telegram Mini App -->
-  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: Arial, sans-serif;
-    }
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+  font-family:Arial,sans-serif;
+}
 
-    body {
-      background: #f4f7fb;
-      color: #172033;
-      padding-bottom: 85px;
-    }
+body{
+  background:#f4f6fb;
+  color:#182033;
+  padding-bottom:90px;
+}
 
-    .header {
-      background: linear-gradient(135deg, #6c5ce7, #4834d4);
-      color: white;
-      padding: 28px 20px 35px;
-      border-radius: 0 0 28px 28px;
-    }
+.header{
+  background:linear-gradient(135deg,#7058ee,#4630c7);
+  color:white;
+  padding:25px 18px 30px;
+  border-radius:0 0 28px 28px;
+}
 
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
 
-    .logo {
-      width: 52px;
-      height: 52px;
-      border-radius: 16px;
-      background: white;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 27px;
-    }
+.logo{
+  width:52px;
+  height:52px;
+  border-radius:16px;
+  background:white;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:27px;
+}
 
-    .brand h1 {
-      font-size: 21px;
-    }
+.brand h1{
+  font-size:21px;
+}
 
-    .brand p {
-      opacity: .8;
-      font-size: 13px;
-      margin-top: 4px;
-    }
+.brand p{
+  font-size:12px;
+  opacity:.8;
+  margin-top:4px;
+}
 
-    .balance-card {
-      margin-top: 25px;
-      background: rgba(255,255,255,.16);
-      padding: 20px;
-      border-radius: 20px;
-      backdrop-filter: blur(10px);
-    }
+.balance-box{
+  margin-top:20px;
+  background:#ffffff22;
+  padding:18px;
+  border-radius:20px;
+}
 
-    .balance-title {
-      font-size: 13px;
-      opacity: .85;
-    }
+.balance-title{
+  font-size:12px;
+  opacity:.8;
+}
 
-    .balance {
-      font-size: 32px;
-      font-weight: bold;
-      margin: 7px 0 15px;
-    }
+.balance{
+  font-size:31px;
+  font-weight:bold;
+  margin:7px 0 14px;
+}
 
-    .withdraw-btn {
-      border: none;
-      width: 100%;
-      padding: 13px;
-      border-radius: 13px;
-      background: white;
-      color: #4834d4;
-      font-weight: bold;
-      font-size: 15px;
-      cursor: pointer;
-    }
+.withdraw{
+  width:100%;
+  border:0;
+  padding:13px;
+  border-radius:13px;
+  background:white;
+  color:#4630c7;
+  font-weight:bold;
+}
 
-    .container {
-      padding: 20px;
-    }
+.container{
+  padding:18px;
+}
 
-    .section-title {
-      font-size: 18px;
-      font-weight: bold;
-      margin-bottom: 14px;
-    }
+.title{
+  font-size:18px;
+  font-weight:bold;
+  margin:5px 0 14px;
+}
 
-    .grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 13px;
-    }
+.grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
 
-    .card {
-      background: white;
-      border-radius: 18px;
-      padding: 20px 15px;
-      box-shadow: 0 5px 18px rgba(0,0,0,.05);
-      cursor: pointer;
-      transition: .2s;
-    }
+.card{
+  background:white;
+  border-radius:18px;
+  padding:17px;
+  box-shadow:0 5px 18px #00000008;
+}
 
-    .card:active {
-      transform: scale(.97);
-    }
+.card:active{
+  transform:scale(.98);
+}
 
-    .icon {
-      width: 43px;
-      height: 43px;
-      border-radius: 13px;
-      background: #eeeaff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 22px;
-      margin-bottom: 12px;
-    }
+.icon{
+  font-size:24px;
+  margin-bottom:10px;
+}
 
-    .card h3 {
-      font-size: 15px;
-      margin-bottom: 5px;
-    }
+.card h3{
+  font-size:15px;
+}
 
-    .card p {
-      font-size: 12px;
-      color: #7b8495;
-    }
+.card p{
+  color:#7c8494;
+  font-size:12px;
+  margin-top:5px;
+  line-height:1.4;
+}
 
-    .ref-card {
-      margin-top: 20px;
-      background: white;
-      border-radius: 18px;
-      padding: 20px;
-      box-shadow: 0 5px 18px rgba(0,0,0,.05);
-    }
+.tasks{
+  margin-top:24px;
+}
 
-    .ref-card h2 {
-      font-size: 17px;
-      margin-bottom: 8px;
-    }
+.task{
+  background:white;
+  border-radius:18px;
+  padding:17px;
+  margin-bottom:12px;
+  box-shadow:0 5px 18px #00000008;
+}
 
-    .ref-card p {
-      color: #727b8b;
-      font-size: 13px;
-      line-height: 1.5;
-    }
+.task-top{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+}
 
-    .invite-btn {
-      margin-top: 15px;
-      width: 100%;
-      padding: 13px;
-      border: none;
-      border-radius: 13px;
-      background: #6c5ce7;
-      color: white;
-      font-weight: bold;
-      font-size: 15px;
-      cursor: pointer;
-    }
+.task h3{
+  font-size:15px;
+}
 
-    .bottom-nav {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 70px;
-      background: white;
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-      border-top: 1px solid #e8ebf0;
-    }
+.reward{
+  color:#5b48d6;
+  font-weight:bold;
+  white-space:nowrap;
+}
 
-    .nav-item {
-      text-align: center;
-      color: #8b93a3;
-      font-size: 11px;
-      cursor: pointer;
-    }
+.task p{
+  color:#7c8494;
+  font-size:12px;
+  margin:8px 0 13px;
+}
 
-    .nav-item.active {
-      color: #6c5ce7;
-      font-weight: bold;
-    }
+.task button{
+  border:0;
+  border-radius:12px;
+  padding:11px 15px;
+  font-weight:bold;
+}
 
-    .nav-icon {
-      font-size: 21px;
-      margin-bottom: 3px;
-    }
-  </style>
+.start{
+  background:#6654e8;
+  color:white;
+}
+
+.verify{
+  background:#18a66a;
+  color:white;
+  display:none;
+}
+
+.completed{
+  background:#e8f7ef;
+  color:#15945b;
+  display:none;
+}
+
+.bottom{
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
+  height:72px;
+  background:white;
+  border-top:1px solid #e7e9ef;
+  display:flex;
+  justify-content:space-around;
+  align-items:center;
+}
+
+.nav{
+  text-align:center;
+  color:#858d9d;
+  font-size:11px;
+}
+
+.nav span{
+  display:block;
+  font-size:21px;
+  margin-bottom:3px;
+}
+
+.nav.active{
+  color:#6654e8;
+  font-weight:bold;
+}
+</style>
 </head>
 
 <body>
 
-  <div class="header">
+<div class="header">
 
-    <div class="brand">
-      <div class="logo">⭐</div>
+  <div class="brand">
+    <div class="logo">⭐</div>
 
-      <div>
-        <h1>FairEarn Bot</h1>
-        <p>Earn • Invite • Reward</p>
-      </div>
+    <div>
+      <h1>FairEarn Bot</h1>
+      <p>Earn • Invite • Reward</p>
+    </div>
+  </div>
+
+  <div class="balance-box">
+
+    <div class="balance-title">
+      Available Balance
     </div>
 
-    <div class="balance-card">
-      <div class="balance-title">Available Balance</div>
+    <div class="balance" id="balance">
+      ৳ 0.00
+    </div>
 
-      <div class="balance">
-        ৳ 0.00
-      </div>
+    <button class="withdraw" onclick="withdraw()">
+      💸 Withdraw
+    </button>
 
-      <button class="withdraw-btn" onclick="withdraw()">
-        💸 Withdraw
-      </button>
+  </div>
+
+</div>
+
+
+<div class="container">
+
+  <div class="title">
+    Quick Actions
+  </div>
+
+  <div class="grid">
+
+    <div class="card" onclick="dailyBonus()">
+      <div class="icon">🎁</div>
+      <h3>Daily Bonus</h3>
+      <p>Claim your daily reward</p>
+    </div>
+
+    <div class="card" onclick="invite()">
+      <div class="icon">👥</div>
+      <h3>Invite & Earn</h3>
+      <p>Invite friends and earn</p>
+    </div>
+
+    <div class="card" onclick="showTasks()">
+      <div class="icon">🎯</div>
+      <h3>Tasks</h3>
+      <p>Complete tasks & earn</p>
+    </div>
+
+    <div class="card" onclick="statistics()">
+      <div class="icon">📊</div>
+      <h3>Statistics</h3>
+      <p>View your earnings</p>
     </div>
 
   </div>
 
 
-  <div class="container">
+  <div class="tasks" id="taskSection">
 
-    <div class="section-title">
-      Quick Actions
-    </div>
-
-    <div class="grid">
-
-      <div class="card" onclick="dailyBonus()">
-        <div class="icon">🎁</div>
-        <h3>Daily Bonus</h3>
-        <p>Claim your daily reward</p>
-      </div>
-
-      <div class="card" onclick="invite()">
-        <div class="icon">👥</div>
-        <h3>Invite & Earn</h3>
-        <p>Invite friends and earn</p>
-      </div>
-
-      <div class="card" onclick="statistics()">
-        <div class="icon">📊</div>
-        <h3>Statistics</h3>
-        <p>View your activity</p>
-      </div>
-
-      <div class="card" onclick="profile()">
-        <div class="icon">👤</div>
-        <h3>My Profile</h3>
-        <p>View your account</p>
-      </div>
-
+    <div class="title">
+      🎯 Available Tasks
     </div>
 
 
-    <div class="ref-card">
+    <!-- TASK 1 -->
 
-      <h2>🤝 Invite Friends</h2>
+    <div class="task">
+
+      <div class="task-top">
+
+        <h3>📢 Join Telegram Channel</h3>
+
+        <div class="reward">
+          +৳5
+        </div>
+
+      </div>
 
       <p>
-        Share your referral link with friends and earn rewards
-        when they join FairEarn Bot ⭐
+        Join our Telegram channel and complete the task.
       </p>
 
-      <button class="invite-btn" onclick="invite()">
-        🔗 Invite Friends
+      <button
+        class="start"
+        onclick="startTask(this,'https://t.me/yourchannel')">
+        Start Task
+      </button>
+
+      <button
+        class="verify"
+        onclick="verifyTask(this,5)">
+        ✓ Verify & Claim
+      </button>
+
+      <button class="completed">
+        ✓ Completed
+      </button>
+
+    </div>
+
+
+    <!-- TASK 2 -->
+
+    <div class="task">
+
+      <div class="task-top">
+
+        <h3>▶️ Subscribe YouTube</h3>
+
+        <div class="reward">
+          +৳10
+        </div>
+
+      </div>
+
+      <p>
+        Subscribe to the YouTube channel and claim your reward.
+      </p>
+
+      <button
+        class="start"
+        onclick="startTask(this,'https://youtube.com')">
+        Start Task
+      </button>
+
+      <button
+        class="verify"
+        onclick="verifyTask(this,10)">
+        ✓ Verify & Claim
+      </button>
+
+      <button class="completed">
+        ✓ Completed
+      </button>
+
+    </div>
+
+
+    <!-- TASK 3 -->
+
+    <div class="task">
+
+      <div class="task-top">
+
+        <h3>👍 Facebook Follow</h3>
+
+        <div class="reward">
+          +৳5
+        </div>
+
+      </div>
+
+      <p>
+        Follow our Facebook page and complete this task.
+      </p>
+
+      <button
+        class="start"
+        onclick="startTask(this,'https://facebook.com')">
+        Start Task
+      </button>
+
+      <button
+        class="verify"
+        onclick="verifyTask(this,5)">
+        ✓ Verify & Claim
+      </button>
+
+      <button class="completed">
+        ✓ Completed
       </button>
 
     </div>
 
   </div>
 
+</div>
 
-  <div class="bottom-nav">
 
-    <div class="nav-item active">
-      <div class="nav-icon">🏠</div>
-      Home
-    </div>
+<!-- BOTTOM NAVIGATION -->
 
-    <div class="nav-item" onclick="invite()">
-      <div class="nav-icon">👥</div>
-      Invite
-    </div>
+<div class="bottom">
 
-    <div class="nav-item" onclick="statistics()">
-      <div class="nav-icon">📊</div>
-      Stats
-    </div>
-
-    <div class="nav-item" onclick="profile()">
-      <div class="nav-icon">👤</div>
-      Profile
-    </div>
-
+  <div class="nav active" onclick="home()">
+    <span>🏠</span>
+    Home
   </div>
 
+  <div class="nav" onclick="showTasks()">
+    <span>🎯</span>
+    Tasks
+  </div>
 
-  <script>
+  <div class="nav" onclick="invite()">
+    <span>👥</span>
+    Invite
+  </div>
 
-    const tg = window.Telegram.WebApp;
+  <div class="nav" onclick="profile()">
+    <span>👤</span>
+    Profile
+  </div>
 
-    tg.ready();
-    tg.expand();
-
-
-    function withdraw() {
-      tg.showAlert("💸 Withdraw system will be available soon!");
-    }
-
-
-    function dailyBonus() {
-      tg.showAlert("🎁 Daily Bonus\n\nYour daily reward system will be connected to the bot soon.");
-    }
-
-
-    function invite() {
-
-      const botUsername = "FairnjBot";
-
-      const link =
-        "https://t.me/" +
-        botUsername +
-        "?start=ref_" +
-        (tg.initDataUnsafe?.user?.id || "user");
-
-      if (tg.openTelegramLink) {
-        tg.openTelegramLink(
-          "https://t.me/share/url?url=" +
-          encodeURIComponent(link) +
-          "&text=" +
-          encodeURIComponent("⭐ Join FairEarn Bot and start earning!")
-        );
-      }
-    }
+</div>
 
 
-    function statistics() {
-      tg.showAlert(
-        "📊 Statistics\n\n" +
-        "Balance: ৳0.00\n" +
-        "Referrals: 0\n" +
-        "Total Earned: ৳0.00"
-      );
-    }
+<script>
+
+const tg = window.Telegram.WebApp;
+
+tg.ready();
+tg.expand();
 
 
-    function profile() {
+// BALANCE
 
-      const user =
-        tg.initDataUnsafe?.user;
+let balance =
+  Number(localStorage.getItem("fairearn_balance") || 0);
 
-      if (!user) {
-        tg.showAlert("Telegram user information not available.");
-        return;
-      }
 
-      tg.showAlert(
-        "👤 My Profile\n\n" +
-        "Name: " +
-        (user.first_name || "User") +
-        "\nUser ID: " +
-        user.id
-      );
-    }
+function updateBalance(){
 
-  </script>
+  document.getElementById("balance").innerText =
+    "৳ " + balance.toFixed(2);
+
+  localStorage.setItem(
+    "fairearn_balance",
+    balance
+  );
+}
+
+updateBalance();
+
+
+// DAILY BONUS
+
+function dailyBonus(){
+
+  const last =
+    Number(localStorage.getItem("daily_bonus") || 0);
+
+  const today =
+    new Date().toDateString();
+
+  if(last === today){
+
+    tg.showAlert(
+      "🎁 আজকের Daily Bonus ইতিমধ্যে নেওয়া হয়েছে।"
+    );
+
+    return;
+  }
+
+  balance += 1;
+
+  localStorage.setItem(
+    "daily_bonus",
+    today
+  );
+
+  updateBalance();
+
+  tg.showAlert(
+    "🎉 Daily Bonus +৳1 যোগ হয়েছে!"
+  );
+}
+
+
+// TASK START
+
+function startTask(button,url){
+
+  window.currentTaskButton = button;
+
+  const task =
+    button.parentElement;
+
+  const verify =
+    task.querySelector(".verify");
+
+  if(tg.openLink){
+
+    tg.openLink(url);
+
+  }else{
+
+    window.open(url,"_blank");
+
+  }
+
+  button.style.display="none";
+
+  verify.style.display="inline-block";
+}
+
+
+// VERIFY TASK
+
+function verifyTask(button,reward){
+
+  const task =
+    button.parentElement;
+
+  const completed =
+    task.querySelector(".completed");
+
+  balance += reward;
+
+  updateBalance();
+
+  button.style.display="none";
+
+  completed.style.display="inline-block";
+
+  tg.showAlert(
+    "🎉 Task completed!\n\nReward +৳" +
+    reward +
+    " যোগ হয়েছে।"
+  );
+}
+
+
+// SHOW TASKS
+
+function showTasks(){
+
+  document
+    .getElementById("taskSection")
+    .scrollIntoView({
+      behavior:"smooth"
+    });
+
+}
+
+
+// INVITE
+
+function invite(){
+
+  const user =
+    tg.initDataUnsafe.user;
+
+  const id =
+    user ? user.id : "user";
+
+  const link =
+    "https://t.me/FairnjBot?start=ref_" + id;
+
+  const share =
+    "https://t.me/share/url?url=" +
+    encodeURIComponent(link) +
+    "&text=" +
+    encodeURIComponent(
+      "⭐ FairEarn Bot-এ যোগ দিন এবং Earn করুন!"
+    );
+
+  if(tg.openTelegramLink){
+
+    tg.openTelegramLink(share);
+
+  }
+
+}
+
+
+// STATISTICS
+
+function statistics(){
+
+  tg.showAlert(
+
+    "📊 Statistics\n\n" +
+
+    "💰 Balance: ৳" +
+    balance.toFixed(2) +
+
+    "\n🎯 Completed Tasks: দেখানো হবে"
+
+  );
+
+}
+
+
+// PROFILE
+
+function profile(){
+
+  const user =
+    tg.initDataUnsafe.user;
+
+  if(!user){
+
+    tg.showAlert(
+      "Telegram profile information পাওয়া যায়নি।"
+    );
+
+    return;
+  }
+
+  tg.showAlert(
+
+    "👤 My Profile\n\n" +
+
+    "Name: " +
+    (user.first_name || "") +
+
+    "\nUsername: @" +
+    (user.username || "Not set") +
+
+    "\nTelegram ID: " +
+    user.id
+
+  );
+
+}
+
+
+// WITHDRAW
+
+function withdraw(){
+
+  if(balance <= 0){
+
+    tg.showAlert(
+      "💸 Withdraw করার মতো balance নেই।"
+    );
+
+    return;
+  }
+
+  tg.showAlert(
+    "💸 Withdraw system শিগগিরই চালু হবে।"
+  );
+
+}
+
+
+// HOME
+
+function home(){
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+
+}
+
+</script>
 
 </body>
 </html>
