@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FairEarn Bot ⭐</title>
+
+  <!-- Telegram Mini App -->
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #f4f7fb;
+      color: #172033;
+      padding-bottom: 85px;
+    }
+
+    .header {
+      background: linear-gradient(135deg, #6c5ce7, #4834d4);
+      color: white;
+      padding: 28px 20px 35px;
+      border-radius: 0 0 28px 28px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo {
+      width: 52px;
+      height: 52px;
+      border-radius: 16px;
+      background: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 27px;
+    }
+
+    .brand h1 {
+      font-size: 21px;
+    }
+
+    .brand p {
+      opacity: .8;
+      font-size: 13px;
+      margin-top: 4px;
+    }
+
+    .balance-card {
+      margin-top: 25px;
+      background: rgba(255,255,255,.16);
+      padding: 20px;
+      border-radius: 20px;
+      backdrop-filter: blur(10px);
+    }
+
+    .balance-title {
+      font-size: 13px;
+      opacity: .85;
+    }
+
+    .balance {
+      font-size: 32px;
+      font-weight: bold;
+      margin: 7px 0 15px;
+    }
+
+    .withdraw-btn {
+      border: none;
+      width: 100%;
+      padding: 13px;
+      border-radius: 13px;
+      background: white;
+      color: #4834d4;
+      font-weight: bold;
+      font-size: 15px;
+      cursor: pointer;
+    }
+
+    .container {
+      padding: 20px;
+    }
+
+    .section-title {
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 14px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 13px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 18px;
+      padding: 20px 15px;
+      box-shadow: 0 5px 18px rgba(0,0,0,.05);
+      cursor: pointer;
+      transition: .2s;
+    }
+
+    .card:active {
+      transform: scale(.97);
+    }
+
+    .icon {
+      width: 43px;
+      height: 43px;
+      border-radius: 13px;
+      background: #eeeaff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      margin-bottom: 12px;
+    }
+
+    .card h3 {
+      font-size: 15px;
+      margin-bottom: 5px;
+    }
+
+    .card p {
+      font-size: 12px;
+      color: #7b8495;
+    }
+
+    .ref-card {
+      margin-top: 20px;
+      background: white;
+      border-radius: 18px;
+      padding: 20px;
+      box-shadow: 0 5px 18px rgba(0,0,0,.05);
+    }
+
+    .ref-card h2 {
+      font-size: 17px;
+      margin-bottom: 8px;
+    }
+
+    .ref-card p {
+      color: #727b8b;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .invite-btn {
+      margin-top: 15px;
+      width: 100%;
+      padding: 13px;
+      border: none;
+      border-radius: 13px;
+      background: #6c5ce7;
+      color: white;
+      font-weight: bold;
+      font-size: 15px;
+      cursor: pointer;
+    }
+
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 70px;
+      background: white;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      border-top: 1px solid #e8ebf0;
+    }
+
+    .nav-item {
+      text-align: center;
+      color: #8b93a3;
+      font-size: 11px;
+      cursor: pointer;
+    }
+
+    .nav-item.active {
+      color: #6c5ce7;
+      font-weight: bold;
+    }
+
+    .nav-icon {
+      font-size: 21px;
+      margin-bottom: 3px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="header">
+
+    <div class="brand">
+      <div class="logo">⭐</div>
+
+      <div>
+        <h1>FairEarn Bot</h1>
+        <p>Earn • Invite • Reward</p>
+      </div>
+    </div>
+
+    <div class="balance-card">
+      <div class="balance-title">Available Balance</div>
+
+      <div class="balance">
+        ৳ 0.00
+      </div>
+
+      <button class="withdraw-btn" onclick="withdraw()">
+        💸 Withdraw
+      </button>
+    </div>
+
+  </div>
+
+
+  <div class="container">
+
+    <div class="section-title">
+      Quick Actions
+    </div>
+
+    <div class="grid">
+
+      <div class="card" onclick="dailyBonus()">
+        <div class="icon">🎁</div>
+        <h3>Daily Bonus</h3>
+        <p>Claim your daily reward</p>
+      </div>
+
+      <div class="card" onclick="invite()">
+        <div class="icon">👥</div>
+        <h3>Invite & Earn</h3>
+        <p>Invite friends and earn</p>
+      </div>
+
+      <div class="card" onclick="statistics()">
+        <div class="icon">📊</div>
+        <h3>Statistics</h3>
+        <p>View your activity</p>
+      </div>
+
+      <div class="card" onclick="profile()">
+        <div class="icon">👤</div>
+        <h3>My Profile</h3>
+        <p>View your account</p>
+      </div>
+
+    </div>
+
+
+    <div class="ref-card">
+
+      <h2>🤝 Invite Friends</h2>
+
+      <p>
+        Share your referral link with friends and earn rewards
+        when they join FairEarn Bot ⭐
+      </p>
+
+      <button class="invite-btn" onclick="invite()">
+        🔗 Invite Friends
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <div class="bottom-nav">
+
+    <div class="nav-item active">
+      <div class="nav-icon">🏠</div>
+      Home
+    </div>
+
+    <div class="nav-item" onclick="invite()">
+      <div class="nav-icon">👥</div>
+      Invite
+    </div>
+
+    <div class="nav-item" onclick="statistics()">
+      <div class="nav-icon">📊</div>
+      Stats
+    </div>
+
+    <div class="nav-item" onclick="profile()">
+      <div class="nav-icon">👤</div>
+      Profile
+    </div>
+
+  </div>
+
+
+  <script>
+
+    const tg = window.Telegram.WebApp;
+
+    tg.ready();
+    tg.expand();
+
+
+    function withdraw() {
+      tg.showAlert("💸 Withdraw system will be available soon!");
+    }
+
+
+    function dailyBonus() {
+      tg.showAlert("🎁 Daily Bonus\n\nYour daily reward system will be connected to the bot soon.");
+    }
+
+
+    function invite() {
+
+      const botUsername = "FairnjBot";
+
+      const link =
+        "https://t.me/" +
+        botUsername +
+        "?start=ref_" +
+        (tg.initDataUnsafe?.user?.id || "user");
+
+      if (tg.openTelegramLink) {
+        tg.openTelegramLink(
+          "https://t.me/share/url?url=" +
+          encodeURIComponent(link) +
+          "&text=" +
+          encodeURIComponent("⭐ Join FairEarn Bot and start earning!")
+        );
+      }
+    }
+
+
+    function statistics() {
+      tg.showAlert(
+        "📊 Statistics\n\n" +
+        "Balance: ৳0.00\n" +
+        "Referrals: 0\n" +
+        "Total Earned: ৳0.00"
+      );
+    }
+
+
+    function profile() {
+
+      const user =
+        tg.initDataUnsafe?.user;
+
+      if (!user) {
+        tg.showAlert("Telegram user information not available.");
+        return;
+      }
+
+      tg.showAlert(
+        "👤 My Profile\n\n" +
+        "Name: " +
+        (user.first_name || "User") +
+        "\nUser ID: " +
+        user.id
+      );
+    }
+
+  </script>
+
+</body>
+</html>
