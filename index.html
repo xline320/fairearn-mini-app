@@ -1,18 +1,7 @@
-<!DOCTYPE html>
-<html lang="bn">
+<!DOCTYPE html><html lang="bn">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>FairEarn Bot ⭐</title>
-
-  <!-- Telegram -->
-  <script src="https://telegram.org/js/telegram-web-app.js"></script>
-
-  <!-- AdsGram -->
-  <script src="https://sad.adsgram.ai/js/sad.min.js"></script>
-
-  <style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">  <title>FairEarn Bot ⭐</title>  <!-- Telegram -->  <script src="https://telegram.org/js/telegram-web-app.js"></script>  <!-- AdsGram -->  <script src="https://sad.adsgram.ai/js/sad.min.js"></script>  <style>
     * {
       box-sizing: border-box;
       margin: 0;
@@ -127,8 +116,6 @@
       line-height: 1.4;
     }
 
-    /* ADS */
-
     .ad-section {
       margin-top: 24px;
     }
@@ -166,8 +153,6 @@
     .watch-ad:disabled {
       opacity: .6;
     }
-
-    /* TASK */
 
     .tasks {
       margin-top: 24px;
@@ -228,8 +213,6 @@
       display: none;
     }
 
-    /* BOTTOM */
-
     .bottom {
       position: fixed;
       bottom: 0;
@@ -271,271 +254,111 @@
       color: #d64545;
       padding: 20px;
     }
-  </style>
-</head>
+  </style></head><body>  <div class="header"><div class="brand">
+  <div class="logo">⭐</div>
 
-<body>
+  <div>
+    <h1>FairEarn Bot</h1>
+    <p>Earn • Invite • Reward</p>
+  </div>
+</div>
 
-  <!-- HEADER -->
+<div class="balance-box">
+  <div class="balance-title">Available Balance</div>
 
-  <div class="header">
+  <div class="balance" id="balance">
+    Loading...
+  </div>
 
-    <div class="brand">
+  <button class="withdraw" onclick="withdraw()">
+    💸 Withdraw
+  </button>
+</div>
 
-      <div class="logo">
-        ⭐
-      </div>
+  </div>  <div class="container"><div class="title">Quick Actions</div>
 
-      <div>
+<div class="grid">
 
-        <h1>
-          FairEarn Bot
-        </h1>
+  <div class="card" onclick="invite()">
+    <div class="icon">👥</div>
+    <h3>Invite & Earn</h3>
+    <p>Invite friends and earn</p>
+  </div>
 
-        <p>
-          Earn • Invite • Reward
-        </p>
+  <div class="card" onclick="showTasks()">
+    <div class="icon">🎯</div>
+    <h3>Tasks</h3>
+    <p>Complete tasks & earn</p>
+  </div>
 
-      </div>
+  <div class="card" onclick="statistics()">
+    <div class="icon">📊</div>
+    <h3>Statistics</h3>
+    <p>View your earnings</p>
+  </div>
 
-    </div>
+</div>
 
+<div class="ad-section">
 
-    <div class="balance-box">
+  <div class="title">📺 Watch & Earn</div>
 
-      <div class="balance-title">
-        Available Balance
-      </div>
+  <div class="ad-card">
 
-      <div
-        class="balance"
-        id="balance"
-      >
-        Loading...
-      </div>
+    <h3>🎁 Watch Ad & Earn</h3>
 
-      <button
-        class="withdraw"
-        onclick="withdraw()"
-      >
-        💸 Withdraw
-      </button>
+    <p id="adMessage">
+      বিজ্ঞাপনটি সম্পূর্ণ দেখুন এবং Reward পান।
+    </p>
 
-    </div>
+    <button
+      class="watch-ad"
+      id="watchAdButton"
+      onclick="watchRewardAd()"
+    >
+      ▶️ Watch Ad
+    </button>
 
   </div>
 
+</div>
 
-  <div class="container">
+<div class="tasks" id="taskSection">
 
-    <!-- QUICK ACTIONS -->
+  <div class="title">🎯 Available Tasks</div>
 
-    <div class="title">
-      Quick Actions
-    </div>
-
-
-    <div class="grid">
-
-      <div
-        class="card"
-        onclick="invite()"
-      >
-
-        <div class="icon">
-          👥
-        </div>
-
-        <h3>
-          Invite & Earn
-        </h3>
-
-        <p>
-          Invite friends and earn
-        </p>
-
-      </div>
-
-
-      <div
-        class="card"
-        onclick="showTasks()"
-      >
-
-        <div class="icon">
-          🎯
-        </div>
-
-        <h3>
-          Tasks
-        </h3>
-
-        <p>
-          Complete tasks & earn
-        </p>
-
-      </div>
-
-
-      <div
-        class="card"
-        onclick="statistics()"
-      >
-
-        <div class="icon">
-          📊
-        </div>
-
-        <h3>
-          Statistics
-        </h3>
-
-        <p>
-          View your earnings
-        </p>
-
-      </div>
-
-    </div>
-
-
-    <!-- WATCH ADS -->
-
-    <div class="ad-section">
-
-      <div class="title">
-        📺 Watch & Earn
-      </div>
-
-
-      <div class="ad-card">
-
-        <h3>
-          🎁 Watch Ad & Earn
-        </h3>
-
-        <p id="adMessage">
-          বিজ্ঞাপনটি সম্পূর্ণ দেখুন এবং Reward পান।
-        </p>
-
-
-        <button
-          class="watch-ad"
-          id="watchAdButton"
-          onclick="watchRewardAd()"
-        >
-          ▶️ Watch Ad
-        </button>
-
-      </div>
-
-    </div>
-
-
-    <!-- TASKS -->
-
-    <div
-      class="tasks"
-      id="taskSection"
-    >
-
-      <div class="title">
-        🎯 Available Tasks
-      </div>
-
-
-      <div id="taskList">
-
-        <div class="loading">
-          Task loading...
-        </div>
-
-      </div>
-
-    </div>
-
+  <div id="taskList">
+    <div class="loading">Task loading...</div>
   </div>
 
+</div>
 
-  <!-- BOTTOM NAV -->
+  </div>  <div class="bottom"><div class="nav active" onclick="home()">
+  <span>🏠</span>
+  Home
+</div>
 
-  <div class="bottom">
+<div class="nav" onclick="showTasks()">
+  <span>🎯</span>
+  Tasks
+</div>
 
-    <div
-      class="nav active"
-      onclick="home()"
-    >
+<div class="nav" onclick="invite()">
+  <span>👥</span>
+  Invite
+</div>
 
-      <span>
-        🏠
-      </span>
+<div class="nav" onclick="profile()">
+  <span>👤</span>
+  Profile
+</div>
 
-      Home
+  </div><script>
 
-    </div>
-
-
-    <div
-      class="nav"
-      onclick="showTasks()"
-    >
-
-      <span>
-        🎯
-      </span>
-
-      Tasks
-
-    </div>
-
-
-    <div
-      class="nav"
-      onclick="invite()"
-    >
-
-      <span>
-        👥
-      </span>
-
-      Invite
-
-    </div>
-
-
-    <div
-      class="nav"
-      onclick="profile()"
-    >
-
-      <span>
-        👤
-      </span>
-
-      Profile
-
-    </div>
-
-  </div>
-
-
-<script>
-
-/* =========================
-   TELEGRAM
-========================= */
-
-const tg =
-  window.Telegram.WebApp;
-
+const tg = window.Telegram.WebApp;
 
 tg.ready();
 tg.expand();
-
-
-/* =========================
-   API
-========================= */
 
 const API =
   "https://fairearn-api.xline320.workers.dev";
@@ -545,51 +368,40 @@ const API =
    ADSGRAM
 ========================= */
 
-const ADSGRAM_BLOCK_ID =
-  "46198";
+const ADSGRAM_BLOCK_ID = "46198";
 
-
-let AdController =
-  null;
+let AdController = null;
 
 
 function initializeAdsGram() {
 
   try {
 
-    if (
-      !window.Adsgram
-    ) {
+    if (!window.Adsgram) {
 
-      console.log(
-        "AdsGram SDK not loaded"
-      );
+      console.log("AdsGram SDK not loaded");
 
       return false;
 
     }
 
+    AdController = window.Adsgram.init({
 
-    AdController =
-      window.Adsgram.init({
+      blockId: ADSGRAM_BLOCK_ID,
 
-        blockId:
-          ADSGRAM_BLOCK_ID
+      /* DEBUG TEST MODE */
+      debug: true
 
-      });
-
+    });
 
     console.log(
-      "AdsGram initialized",
+      "AdsGram initialized:",
       ADSGRAM_BLOCK_ID
     );
 
-
     return true;
 
-  }
-
-  catch (error) {
+  } catch (error) {
 
     console.error(
       "AdsGram initialization error:",
@@ -603,84 +415,47 @@ function initializeAdsGram() {
 }
 
 
-/* =========================
-   BALANCE
-========================= */
-
 let balance = 0;
 
 
-/* =========================
-   LOAD USER
-========================= */
+/* LOAD USER */
 
 async function loadUser() {
 
-  const user =
-    tg.initDataUnsafe.user;
-
+  const user = tg.initDataUnsafe.user;
 
   if (!user) {
 
-    document.getElementById(
-      "balance"
-    ).innerText =
+    document.getElementById("balance").innerText =
       "৳ 0.00";
 
     return;
 
   }
 
-
   try {
 
-    const response =
-      await fetch(
-        API +
-        "/api/me?telegram_id=" +
-        user.id
-      );
+    const response = await fetch(
+      API +
+      "/api/me?telegram_id=" +
+      user.id
+    );
 
+    const data = await response.json();
 
-    const data =
-      await response.json();
-
-
-    if (
-      data.success &&
-      data.user
-    ) {
+    if (data.success && data.user) {
 
       balance =
-        Number(
-          data.user.balance || 0
-        );
+        Number(data.user.balance || 0);
 
-
-      document.getElementById(
-        "balance"
-      ).innerText =
-        "৳ " +
-        balance.toFixed(2);
+      document.getElementById("balance").innerText =
+        "৳ " + balance.toFixed(2);
 
     }
 
-    else {
+  } catch (error) {
 
-      document.getElementById(
-        "balance"
-      ).innerText =
-        "৳ 0.00";
-
-    }
-
-  }
-
-  catch (error) {
-
-    document.getElementById(
-      "balance"
-    ).innerText =
+    document.getElementById("balance").innerText =
       "৳ 0.00";
 
   }
@@ -688,36 +463,22 @@ async function loadUser() {
 }
 
 
-/* =========================
-   LOAD TASKS
-========================= */
+/* LOAD TASKS */
 
 async function loadTasks() {
 
   const taskList =
-    document.getElementById(
-      "taskList"
-    );
-
+    document.getElementById("taskList");
 
   try {
 
     const response =
-      await fetch(
-        API + "/api/tasks"
-      );
-
+      await fetch(API + "/api/tasks");
 
     const data =
       await response.json();
 
-
-    if (
-      !data.success ||
-      !Array.isArray(
-        data.tasks
-      )
-    ) {
+    if (!data.success || !Array.isArray(data.tasks)) {
 
       taskList.innerHTML =
         '<div class="error">Task load failed</div>';
@@ -726,10 +487,7 @@ async function loadTasks() {
 
     }
 
-
-    if (
-      data.tasks.length === 0
-    ) {
+    if (data.tasks.length === 0) {
 
       taskList.innerHTML =
         '<div class="loading">কোনো Task নেই।</div>';
@@ -738,84 +496,54 @@ async function loadTasks() {
 
     }
 
+    taskList.innerHTML = "";
 
-    taskList.innerHTML =
-      "";
+    data.tasks.forEach(function(task) {
 
+      const div =
+        document.createElement("div");
 
-    data.tasks.forEach(
-      function(task) {
+      div.className = "task";
 
-        const div =
-          document.createElement(
-            "div"
-          );
+      div.innerHTML = `
 
+        <div class="task-top">
 
-        div.className =
-          "task";
+          <h3>
+            📢 ${escapeHtml(task.title)}
+          </h3>
 
-
-        div.innerHTML = `
-
-          <div class="task-top">
-
-            <h3>
-              📢 ${escapeHtml(task.title)}
-            </h3>
-
-            <div class="reward">
-              +৳${Number(task.reward).toFixed(2)}
-            </div>
-
+          <div class="reward">
+            +৳${Number(task.reward).toFixed(2)}
           </div>
 
+        </div>
 
-          <p>
-            ${escapeHtml(
-              task.description || ""
-            )}
-          </p>
+        <p>
+          ${escapeHtml(task.description || "")}
+        </p>
 
+        <button
+          class="start"
+          onclick="startTask(this, '${encodeURIComponent(task.url)}')"
+        >
+          Start Task
+        </button>
 
-          <button
-            class="start"
-            onclick="startTask(
-              this,
-              '${encodeURIComponent(task.url)}'
-            )"
-          >
-            Start Task
-          </button>
+        <button
+          class="verify"
+          onclick="verifyTask(this)"
+        >
+          ✓ Verify & Claim
+        </button>
 
+      `;
 
-          <button
-            class="verify"
-            onclick="verifyTask(this)"
-          >
-            ✓ Verify & Claim
-          </button>
+      taskList.appendChild(div);
 
+    });
 
-          <button
-            class="completed"
-          >
-            ✓ Completed
-          </button>
-
-        `;
-
-
-        taskList.appendChild(
-          div
-        );
-
-      }
-    );
-
-  }
-
-  catch (error) {
+  } catch (error) {
 
     taskList.innerHTML =
       '<div class="error">Task load failed</div>';
@@ -825,89 +553,29 @@ async function loadTasks() {
 }
 
 
-/* =========================
-   ESCAPE HTML
-========================= */
-
 function escapeHtml(text) {
 
   return String(text)
-
-    .replace(
-      /&/g,
-      "&amp;"
-    )
-
-    .replace(
-      /</g,
-      "&lt;"
-    )
-
-    .replace(
-      />/g,
-      "&gt;"
-    )
-
-    .replace(
-      /"/g,
-      "&quot;"
-    )
-
-    .replace(
-      /'/g,
-      "&#039;"
-    );
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
 
 }
 
 
-/* =========================
-   START TASK
-========================= */
-
-function startTask(
-  button,
-  encodedUrl
-) {
+function startTask(button, encodedUrl) {
 
   const url =
-    decodeURIComponent(
-      encodedUrl
-    );
+    decodeURIComponent(encodedUrl);
 
-
-  const task =
-    button.parentElement;
-
-
-  const verify =
-    task.querySelector(
-      ".verify"
-    );
-
-
-  tg.openLink(
-    url
-  );
-
-
-  button.style.display =
-    "none";
-
-
-  verify.style.display =
-    "inline-block";
+  tg.openLink(url);
 
 }
 
 
-/* =========================
-   VERIFY
-========================= */
-
-function verifyTask(
-  button
-) {
+function verifyTask() {
 
   tg.showAlert(
     "⚠️ আসল Task Verification এখনো চালু হয়নি।"
@@ -916,31 +584,21 @@ function verifyTask(
 }
 
 
-/* =========================
-   WATCH REWARDED AD
-========================= */
+/* WATCH AD */
 
 async function watchRewardAd() {
 
   const button =
-    document.getElementById(
-      "watchAdButton"
-    );
-
+    document.getElementById("watchAdButton");
 
   const message =
-    document.getElementById(
-      "adMessage"
-    );
+    document.getElementById("adMessage");
 
 
-  if (
-    !AdController
-  ) {
+  if (!AdController) {
 
     const initialized =
       initializeAdsGram();
-
 
     if (!initialized) {
 
@@ -955,13 +613,10 @@ async function watchRewardAd() {
   }
 
 
-  button.disabled =
-    true;
-
+  button.disabled = true;
 
   button.innerText =
     "⏳ Loading Ad...";
-
 
   message.innerText =
     "বিজ্ঞাপন খোঁজা হচ্ছে...";
@@ -972,71 +627,47 @@ async function watchRewardAd() {
     const result =
       await AdController.show();
 
-
     console.log(
       "AdsGram result:",
       result
     );
 
 
-    if (
-      result &&
-      result.done === true
-    ) {
+    if (result && result.done === true) {
 
       message.innerText =
         "✅ বিজ্ঞাপন সম্পূর্ণ দেখা হয়েছে।";
 
-
-      /*
-       * এখানে এখনো balance যোগ করা হচ্ছে না।
-       * Secure backend reward verification
-       * তৈরি করার পর এখানে reward API যুক্ত হবে।
-       */
-
-
       tg.showAlert(
-        "✅ বিজ্ঞাপন সম্পূর্ণ দেখা হয়েছে!\n\nReward verification শিগগিরই যুক্ত হবে।"
+        "✅ বিজ্ঞাপন সম্পূর্ণ দেখা হয়েছে!"
       );
 
-    }
-
-    else {
+    } else {
 
       message.innerText =
         "⚠️ বিজ্ঞাপনটি সম্পূর্ণ দেখা হয়নি।";
 
-
-      tg.showAlert(
-        "⚠️ বিজ্ঞাপনটি সম্পূর্ণ দেখা হয়নি।"
-      );
-
     }
 
-  }
-
-  catch (error) {
+  } catch (error) {
 
     console.error(
       "AdsGram error:",
       error
     );
 
-
     message.innerText =
-      "⚠️ এই মুহূর্তে কোনো বিজ্ঞাপন পাওয়া যায়নি।";
-
+      "⚠️ কোনো বিজ্ঞাপন পাওয়া যায়নি।";
 
     tg.showAlert(
-      "⚠️ এই মুহূর্তে কোনো বিজ্ঞাপন পাওয়া যাচ্ছে না।\n\nকিছুক্ষণ পরে আবার চেষ্টা করুন।"
+      "⚠️ Ad Error:\n\n" +
+      (error.description || error.message || "No ad available")
     );
 
   }
 
 
-  button.disabled =
-    false;
-
+  button.disabled = false;
 
   button.innerText =
     "▶️ Watch Ad";
@@ -1044,26 +675,30 @@ async function watchRewardAd() {
 }
 
 
-/* =========================
-   INVITE
-========================= */
+/* OTHER FUNCTIONS */
+
+function showTasks() {
+
+  document
+    .getElementById("taskSection")
+    .scrollIntoView({
+      behavior: "smooth"
+    });
+
+}
+
 
 function invite() {
 
   const user =
     tg.initDataUnsafe.user;
 
-
   const id =
-    user
-      ? user.id
-      : "user";
-
+    user ? user.id : "user";
 
   const link =
     "https://t.me/FairnjBot?start=ref_" +
     id;
-
 
   const share =
     "https://t.me/share/url?url=" +
@@ -1073,42 +708,25 @@ function invite() {
       "⭐ FairEarn Bot-এ যোগ দিন এবং Earn করুন!"
     );
 
-
-  tg.openTelegramLink(
-    share
-  );
+  tg.openTelegramLink(share);
 
 }
 
-
-/* =========================
-   STATISTICS
-========================= */
 
 function statistics() {
 
   tg.showAlert(
-
-    "📊 Statistics\n\n" +
-
-    "💰 Balance: ৳" +
-
+    "📊 Statistics\n\n💰 Balance: ৳" +
     balance.toFixed(2)
-
   );
 
 }
 
-
-/* =========================
-   PROFILE
-========================= */
 
 function profile() {
 
   const user =
     tg.initDataUnsafe.user;
-
 
   if (!user) {
 
@@ -1120,58 +738,28 @@ function profile() {
 
   }
 
-
   tg.showAlert(
-
     "👤 My Profile\n\n" +
-
-    "Name: " +
-
-    (
-      user.first_name ||
-      ""
-    ) +
-
-    "\nUsername: @" +
-
-    (
-      user.username ||
-      "Not set"
-    ) +
-
-    "\nTelegram ID: " +
-
-    user.id
-
+    "Name: " + (user.first_name || "") +
+    "\nUsername: @" + (user.username || "Not set") +
+    "\nTelegram ID: " + user.id
   );
 
 }
 
 
-/* =========================
-   WITHDRAW
-========================= */
-
 function withdraw() {
 
-  if (
-    balance < 50
-  ) {
+  if (balance < 50) {
 
     tg.showAlert(
-
-      "💸 Minimum Withdraw ৳50\n\n" +
-
-      "বর্তমান Balance: ৳" +
-
+      "💸 Minimum Withdraw ৳50\n\nবর্তমান Balance: ৳" +
       balance.toFixed(2)
-
     );
 
     return;
 
   }
-
 
   tg.showAlert(
     "💸 Withdraw system শিগগিরই চালু হবে।"
@@ -1180,27 +768,17 @@ function withdraw() {
 }
 
 
-/* =========================
-   HOME
-========================= */
-
 function home() {
 
   window.scrollTo({
-
     top: 0,
-
-    behavior:
-      "smooth"
-
+    behavior: "smooth"
   });
 
 }
 
 
-/* =========================
-   START
-========================= */
+/* START */
 
 initializeAdsGram();
 
@@ -1208,7 +786,5 @@ loadUser();
 
 loadTasks();
 
-</script>
-
-</body>
+</script></body>
 </html>
