@@ -346,7 +346,7 @@
         </h3>
 
         <p id="adMessage">
-          বিজ্ঞাপনটি সম্পূর্ণ দেখুন এবং Reward পান।
+          বিজ্ঞাপনটি সম্পূর্ণ দেখুন এবং Reward (৳0.05) পান।
         </p>
 
         <button
@@ -454,7 +454,7 @@ async function watchRewardAd() {
     // অ্যাড সফলভাবে দেখার পর
     message.innerText = "🎉 সফল! বিজ্ঞাপন সম্পূর্ণ দেখা হয়েছে।";
 
-    const rewardAmount = 0.50; // প্রতি অ্যাড দেখার জন্য ইউজার যে রিওয়ার্ড পাবে (টাকায়)
+    const rewardAmount = 0.05; // প্রতি কাজ/অ্যাড দেখার জন্য ৫ পয়সা (৳0.05)
 
     // ব্যাকএন্ড সার্ভারে রিওয়ার্ড পাঠানোর চেষ্টা
     if (user) {
@@ -476,7 +476,7 @@ async function watchRewardAd() {
     balance += rewardAmount;
     document.getElementById("balance").innerText = "৳ " + balance.toFixed(2);
 
-    tg.showAlert(`🎉 বিজ্ঞাপন দেখার জন্য আপনি ৳${rewardAmount.toFixed(2)} পেয়েছেন!`);
+    tg.showAlert(`🎉 বিজ্ঞাপন দেখার জন্য আপনি ৳${rewardAmount.toFixed(2)} (৫ পয়সা) পেয়েছেন!`);
 
   } catch (error) {
     console.error("Monetag Ad Error:", error);
