@@ -3,11 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>FairEarn Bot ⭐</title>
 
+  <!-- Telegram -->
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
 
-  <!-- AdsGram SDK -->
+  <!-- AdsGram -->
   <script src="https://sad.adsgram.ai/js/sad.min.js"></script>
 
   <style>
@@ -125,6 +127,48 @@
       line-height: 1.4;
     }
 
+    /* ADS */
+
+    .ad-section {
+      margin-top: 24px;
+    }
+
+    .ad-card {
+      background: white;
+      border-radius: 18px;
+      padding: 18px;
+      box-shadow: 0 5px 18px #00000008;
+    }
+
+    .ad-card h3 {
+      font-size: 16px;
+      margin-bottom: 7px;
+    }
+
+    .ad-card p {
+      color: #7c8494;
+      font-size: 12px;
+      line-height: 1.5;
+      margin-bottom: 14px;
+    }
+
+    .watch-ad {
+      width: 100%;
+      border: 0;
+      border-radius: 13px;
+      padding: 13px;
+      background: #6654e8;
+      color: white;
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    .watch-ad:disabled {
+      opacity: .6;
+    }
+
+    /* TASK */
+
     .tasks {
       margin-top: 24px;
     }
@@ -184,47 +228,7 @@
       display: none;
     }
 
-    /* =========================
-       WATCH AD BUTTON
-    ========================= */
-
-    .ad-section {
-      margin-top: 24px;
-    }
-
-    .ad-card {
-      background: white;
-      border-radius: 18px;
-      padding: 18px;
-      box-shadow: 0 5px 18px #00000008;
-    }
-
-    .ad-card h3 {
-      font-size: 16px;
-      margin-bottom: 7px;
-    }
-
-    .ad-card p {
-      color: #7c8494;
-      font-size: 12px;
-      line-height: 1.5;
-      margin-bottom: 14px;
-    }
-
-    .watch-ad {
-      width: 100%;
-      border: 0;
-      border-radius: 13px;
-      padding: 13px;
-      background: #6654e8;
-      color: white;
-      font-weight: bold;
-      font-size: 14px;
-    }
-
-    .watch-ad:disabled {
-      opacity: .6;
-    }
+    /* BOTTOM */
 
     .bottom {
       position: fixed;
@@ -272,6 +276,8 @@
 
 <body>
 
+  <!-- HEADER -->
+
   <div class="header">
 
     <div class="brand">
@@ -281,11 +287,19 @@
       </div>
 
       <div>
-        <h1>FairEarn Bot</h1>
-        <p>Earn • Invite • Reward</p>
+
+        <h1>
+          FairEarn Bot
+        </h1>
+
+        <p>
+          Earn • Invite • Reward
+        </p>
+
       </div>
 
     </div>
+
 
     <div class="balance-box">
 
@@ -293,11 +307,17 @@
         Available Balance
       </div>
 
-      <div class="balance" id="balance">
+      <div
+        class="balance"
+        id="balance"
+      >
         Loading...
       </div>
 
-      <button class="withdraw" onclick="withdraw()">
+      <button
+        class="withdraw"
+        onclick="withdraw()"
+      >
         💸 Withdraw
       </button>
 
@@ -308,13 +328,19 @@
 
   <div class="container">
 
+    <!-- QUICK ACTIONS -->
+
     <div class="title">
       Quick Actions
     </div>
 
+
     <div class="grid">
 
-      <div class="card" onclick="invite()">
+      <div
+        class="card"
+        onclick="invite()"
+      >
 
         <div class="icon">
           👥
@@ -331,7 +357,10 @@
       </div>
 
 
-      <div class="card" onclick="showTasks()">
+      <div
+        class="card"
+        onclick="showTasks()"
+      >
 
         <div class="icon">
           🎯
@@ -348,7 +377,10 @@
       </div>
 
 
-      <div class="card" onclick="statistics()">
+      <div
+        class="card"
+        onclick="statistics()"
+      >
 
         <div class="icon">
           📊
@@ -367,9 +399,7 @@
     </div>
 
 
-    <!-- =========================
-         WATCH ADS
-    ========================= -->
+    <!-- WATCH ADS -->
 
     <div class="ad-section">
 
@@ -377,15 +407,17 @@
         📺 Watch & Earn
       </div>
 
+
       <div class="ad-card">
 
         <h3>
           🎁 Watch Ad & Earn
         </h3>
 
-        <p>
+        <p id="adMessage">
           বিজ্ঞাপনটি সম্পূর্ণ দেখুন এবং Reward পান।
         </p>
+
 
         <button
           class="watch-ad"
@@ -400,15 +432,17 @@
     </div>
 
 
-    <!-- =========================
-         TASKS
-    ========================= -->
+    <!-- TASKS -->
 
-    <div class="tasks" id="taskSection">
+    <div
+      class="tasks"
+      id="taskSection"
+    >
 
       <div class="title">
         🎯 Available Tasks
       </div>
+
 
       <div id="taskList">
 
@@ -423,9 +457,14 @@
   </div>
 
 
+  <!-- BOTTOM NAV -->
+
   <div class="bottom">
 
-    <div class="nav active" onclick="home()">
+    <div
+      class="nav active"
+      onclick="home()"
+    >
 
       <span>
         🏠
@@ -436,7 +475,10 @@
     </div>
 
 
-    <div class="nav" onclick="showTasks()">
+    <div
+      class="nav"
+      onclick="showTasks()"
+    >
 
       <span>
         🎯
@@ -447,7 +489,10 @@
     </div>
 
 
-    <div class="nav" onclick="invite()">
+    <div
+      class="nav"
+      onclick="invite()"
+    >
 
       <span>
         👥
@@ -458,7 +503,10 @@
     </div>
 
 
-    <div class="nav" onclick="profile()">
+    <div
+      class="nav"
+      onclick="profile()"
+    >
 
       <span>
         👤
@@ -473,7 +521,21 @@
 
 <script>
 
-const tg = window.Telegram.WebApp;
+/* =========================
+   TELEGRAM
+========================= */
+
+const tg =
+  window.Telegram.WebApp;
+
+
+tg.ready();
+tg.expand();
+
+
+/* =========================
+   API
+========================= */
 
 const API =
   "https://fairearn-api.xline320.workers.dev";
@@ -486,36 +548,64 @@ const API =
 const ADSGRAM_BLOCK_ID =
   "46198";
 
-let AdController = null;
 
-try {
+let AdController =
+  null;
 
-  if (window.Adsgram) {
+
+function initializeAdsGram() {
+
+  try {
+
+    if (
+      !window.Adsgram
+    ) {
+
+      console.log(
+        "AdsGram SDK not loaded"
+      );
+
+      return false;
+
+    }
+
 
     AdController =
       window.Adsgram.init({
-        blockId: ADSGRAM_BLOCK_ID
+
+        blockId:
+          ADSGRAM_BLOCK_ID
+
       });
+
+
+    console.log(
+      "AdsGram initialized",
+      ADSGRAM_BLOCK_ID
+    );
+
+
+    return true;
 
   }
 
-} catch (error) {
+  catch (error) {
 
-  console.log(
-    "AdsGram initialization error:",
-    error
-  );
+    console.error(
+      "AdsGram initialization error:",
+      error
+    );
+
+    return false;
+
+  }
 
 }
 
 
 /* =========================
-   TELEGRAM
+   BALANCE
 ========================= */
-
-tg.ready();
-tg.expand();
-
 
 let balance = 0;
 
@@ -529,6 +619,7 @@ async function loadUser() {
   const user =
     tg.initDataUnsafe.user;
 
+
   if (!user) {
 
     document.getElementById(
@@ -537,6 +628,7 @@ async function loadUser() {
       "৳ 0.00";
 
     return;
+
   }
 
 
@@ -612,8 +704,7 @@ async function loadTasks() {
 
     const response =
       await fetch(
-        API +
-        "/api/tasks"
+        API + "/api/tasks"
       );
 
 
@@ -648,7 +739,8 @@ async function loadTasks() {
     }
 
 
-    taskList.innerHTML = "";
+    taskList.innerHTML =
+      "";
 
 
     data.tasks.forEach(
@@ -678,11 +770,13 @@ async function loadTasks() {
 
           </div>
 
+
           <p>
             ${escapeHtml(
               task.description || ""
             )}
           </p>
+
 
           <button
             class="start"
@@ -694,12 +788,14 @@ async function loadTasks() {
             Start Task
           </button>
 
+
           <button
             class="verify"
             onclick="verifyTask(this)"
           >
             ✓ Verify & Claim
           </button>
+
 
           <button
             class="completed"
@@ -730,28 +826,33 @@ async function loadTasks() {
 
 
 /* =========================
-   SAFE TEXT
+   ESCAPE HTML
 ========================= */
 
 function escapeHtml(text) {
 
   return String(text)
+
     .replace(
       /&/g,
       "&amp;"
     )
+
     .replace(
       /</g,
       "&lt;"
     )
+
     .replace(
       />/g,
       "&gt;"
     )
+
     .replace(
       /"/g,
       "&quot;"
     )
+
     .replace(
       /'/g,
       "&#039;"
@@ -785,7 +886,9 @@ function startTask(
     );
 
 
-  tg.openLink(url);
+  tg.openLink(
+    url
+  );
 
 
   button.style.display =
@@ -802,7 +905,9 @@ function startTask(
    VERIFY
 ========================= */
 
-function verifyTask(button) {
+function verifyTask(
+  button
+) {
 
   tg.showAlert(
     "⚠️ আসল Task Verification এখনো চালু হয়নি।"
@@ -823,21 +928,43 @@ async function watchRewardAd() {
     );
 
 
-  if (!AdController) {
-
-    tg.showAlert(
-      "⚠️ AdsGram এখনো প্রস্তুত নয়। কিছুক্ষণ পরে আবার চেষ্টা করুন।"
+  const message =
+    document.getElementById(
+      "adMessage"
     );
 
-    return;
+
+  if (
+    !AdController
+  ) {
+
+    const initialized =
+      initializeAdsGram();
+
+
+    if (!initialized) {
+
+      tg.showAlert(
+        "❌ AdsGram চালু করা যায়নি।"
+      );
+
+      return;
+
+    }
 
   }
 
 
-  button.disabled = true;
+  button.disabled =
+    true;
+
 
   button.innerText =
     "⏳ Loading Ad...";
+
+
+  message.innerText =
+    "বিজ্ঞাপন খোঁজা হচ্ছে...";
 
 
   try {
@@ -846,25 +973,39 @@ async function watchRewardAd() {
       await AdController.show();
 
 
+    console.log(
+      "AdsGram result:",
+      result
+    );
+
+
     if (
       result &&
       result.done === true
     ) {
 
+      message.innerText =
+        "✅ বিজ্ঞাপন সম্পূর্ণ দেখা হয়েছে।";
+
+
       /*
-       * IMPORTANT:
        * এখানে এখনো balance যোগ করা হচ্ছে না।
-       * Backend reward verification চালু করার পর
-       * এখানে secure API call যোগ করা হবে।
+       * Secure backend reward verification
+       * তৈরি করার পর এখানে reward API যুক্ত হবে।
        */
 
+
       tg.showAlert(
-        "✅ বিজ্ঞাপন সম্পূর্ণ দেখা হয়েছে!\n\nReward system শিগগিরই চালু হবে।"
+        "✅ বিজ্ঞাপন সম্পূর্ণ দেখা হয়েছে!\n\nReward verification শিগগিরই যুক্ত হবে।"
       );
 
     }
 
     else {
+
+      message.innerText =
+        "⚠️ বিজ্ঞাপনটি সম্পূর্ণ দেখা হয়নি।";
+
 
       tg.showAlert(
         "⚠️ বিজ্ঞাপনটি সম্পূর্ণ দেখা হয়নি।"
@@ -876,8 +1017,18 @@ async function watchRewardAd() {
 
   catch (error) {
 
+    console.error(
+      "AdsGram error:",
+      error
+    );
+
+
+    message.innerText =
+      "⚠️ এই মুহূর্তে কোনো বিজ্ঞাপন পাওয়া যায়নি।";
+
+
     tg.showAlert(
-      "❌ বিজ্ঞাপন দেখানো যায়নি। কিছুক্ষণ পরে আবার চেষ্টা করুন।"
+      "⚠️ এই মুহূর্তে কোনো বিজ্ঞাপন পাওয়া যাচ্ছে না।\n\nকিছুক্ষণ পরে আবার চেষ্টা করুন।"
     );
 
   }
@@ -886,6 +1037,7 @@ async function watchRewardAd() {
   button.disabled =
     false;
 
+
   button.innerText =
     "▶️ Watch Ad";
 
@@ -893,22 +1045,8 @@ async function watchRewardAd() {
 
 
 /* =========================
-   OTHER FUNCTIONS
+   INVITE
 ========================= */
-
-function showTasks() {
-
-  document
-    .getElementById(
-      "taskSection"
-    )
-    .scrollIntoView({
-      behavior:
-        "smooth"
-    });
-
-}
-
 
 function invite() {
 
@@ -943,6 +1081,10 @@ function invite() {
 }
 
 
+/* =========================
+   STATISTICS
+========================= */
+
 function statistics() {
 
   tg.showAlert(
@@ -957,6 +1099,10 @@ function statistics() {
 
 }
 
+
+/* =========================
+   PROFILE
+========================= */
 
 function profile() {
 
@@ -1002,6 +1148,10 @@ function profile() {
 }
 
 
+/* =========================
+   WITHDRAW
+========================= */
+
 function withdraw() {
 
   if (
@@ -1030,6 +1180,10 @@ function withdraw() {
 }
 
 
+/* =========================
+   HOME
+========================= */
+
 function home() {
 
   window.scrollTo({
@@ -1045,10 +1199,13 @@ function home() {
 
 
 /* =========================
-   START APP
+   START
 ========================= */
 
+initializeAdsGram();
+
 loadUser();
+
 loadTasks();
 
 </script>
