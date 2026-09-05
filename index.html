@@ -9,8 +9,8 @@
   <!-- Telegram Mini App -->
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
 
-  <!-- AdsGram SDK -->
-  <script src="https://sad.adsgram.ai/js/sad.min.js"></script>
+  <!-- Monetag SDK -->
+  <script src='//libtl.com/sdk.js' data-zone='11732184' data-sdk='show_11732184'></script>
 
   <style>
     * {
@@ -86,6 +86,7 @@
       background: white;
       color: #4630c7;
       font-weight: bold;
+      cursor: pointer;
     }
 
     .container {
@@ -210,6 +211,7 @@
       border-radius: 12px;
       padding: 11px 15px;
       font-weight: bold;
+      cursor: pointer;
     }
 
     .start {
@@ -427,241 +429,62 @@ const API =
 
 
 /* =========================
-   ADSGRAM
+   WATCH AD (MONETAG)
 ========================= */
 
-const ADSGRAM_BLOCK_ID = "46198";
+async function watchRewardAd() {
 
-let AdController = null;
+  const button = document.getElementById("watchAdButton");
+  const message = document.getElementById("adMessage");
+  const user = tg.initDataUnsafe.user;
 
-
-/* Wait until SDK is available */
-
-function initializeAdsGram() {
-
-  const message =
-    document.getElementById("adMessage");
-
-  if (!window.Adsgram) {
-
-    message.innerText =
-      "⏳ AdsGram SDK loading...";
-
-    setTimeout(
-      initializeAdsGram,
-      500
-    );
-
+  if (typeof show_11732184 !== 'function') {
+    message.innerText = "⏳ Ad system লোড হচ্ছে, কিছুক্ষণ পর চেষ্টা করুন...";
     return;
   }
-
-
-  try {
-
-    AdController =
-      window.Adsgram.init({
-
-        blockId: ADSGRAM_BLOCK_ID,
-
-        /* TEST MODE */
-        debug: true,
-
-        debugConsole: true,
-
-        debugBannerType:
-          "RewardedVideo"
-
-      });
-
-
-    message.innerText =
-      "✅ Ad system ready. Watch Ad চাপুন।";
-
-
-    /* EVENT: AD START */
-
-    AdController.addEventListener(
-      "onStart",
-      function() {
-
-        message.innerText =
-          "▶️ বিজ্ঞাপন চলছে...";
-
-      }
-    );
-
-
-    /* EVENT: REWARD */
-
-    AdController.addEventListener(
-      "onReward",
-      function() {
-
-        message.innerText =
-          "🎉 বিজ্ঞাপন সম্পূর্ণ দেখা হয়েছে!";
-
-      }
-    );
-
-
-    /* EVENT: NO AD */
-
-    AdController.addEventListener(
-      "onBannerNotFound",
-      function() {
-
-        message.innerText =
-          "❌ কোনো বিজ্ঞাপন পাওয়া যায়নি।";
-
-      }
-    );
-
-
-    /* EVENT: ERROR */
-
-    AdController.addEventListener(
-      "onError",
-      function() {
-
-        message.innerText =
-          "❌ AdsGram error হয়েছে।";
-
-      }
-    );
-
-
-    console.log(
-      "AdsGram Ready",
-      ADSGRAM_BLOCK_ID
-    );
-
-  }
-
-  catch (error) {
-
-    console.error(
-      "AdsGram Init Error:",
-      error
-    );
-
-    message.innerText =
-      "❌ AdsGram initialization failed";
-
-  }
-
-}
-
-
-/* =========================
-   WATCH AD
-========================= */
-
-function watchRewardAd() {
-
-  const button =
-    document.getElementById(
-      "watchAdButton"
-    );
-
-  const message =
-    document.getElementById(
-      "adMessage"
-    );
-
-
-  if (!AdController) {
-
-    message.innerText =
-      "⏳ Ad system এখনও প্রস্তুত হচ্ছে...";
-
-    initializeAdsGram();
-
-    return;
-
-  }
-
 
   button.disabled = true;
+  button.innerText = "⏳ Loading Ad...";
+  message.innerText = "🔄 বিজ্ঞাপন লোড হচ্ছে...";
 
-  button.innerText =
-    "⏳ Loading Ad...";
+  try {
+    // Monetag Ad প্রদর্শন
+    await show_11732184();
 
-  message.innerText =
-    "🔄 বিজ্ঞাপন লোড হচ্ছে...";
+    // অ্যাড সফলভাবে দেখার পর
+    message.innerText = "🎉 সফল! বিজ্ঞাপন সম্পূর্ণ দেখা হয়েছে।";
 
+    const rewardAmount = 0.50; // প্রতি অ্যাড দেখার জন্য ইউজার যে রিওয়ার্ড পাবে (টাকায়)
 
-  AdController.show()
-
-    .then(function(result) {
-
-      console.log(
-        "AdsGram Success:",
-        result
-      );
-
-
-      if (
-        result &&
-        result.done === true
-      ) {
-
-        message.innerText =
-          "🎉 সফল! বিজ্ঞাপন সম্পূর্ণ দেখা হয়েছে।";
-
-
-        tg.showAlert(
-          "🎉 বিজ্ঞাপন সম্পূর্ণ দেখা হয়েছে!"
-        );
-
+    // ব্যাকএন্ড সার্ভারে রিওয়ার্ড পাঠানোর চেষ্টা
+    if (user) {
+      try {
+        await fetch(API + "/api/add-reward", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            telegram_id: user.id,
+            reward: rewardAmount
+          })
+        });
+      } catch (err) {
+        console.error("Reward update API error:", err);
       }
+    }
 
-      else {
+    // ফ্রন্টএন্ডের ব্যালেন্স আপডেট
+    balance += rewardAmount;
+    document.getElementById("balance").innerText = "৳ " + balance.toFixed(2);
 
-        message.innerText =
-          "⚠️ বিজ্ঞাপন সম্পূর্ণ দেখা হয়নি।";
+    tg.showAlert(`🎉 বিজ্ঞাপন দেখার জন্য আপনি ৳${rewardAmount.toFixed(2)} পেয়েছেন!`);
 
-      }
-
-    })
-
-
-    .catch(function(result) {
-
-      console.error(
-        "AdsGram Error:",
-        result
-      );
-
-
-      let errorText =
-        "Ad পাওয়া যায়নি";
-
-
-      if (
-        result &&
-        result.description
-      ) {
-
-        errorText =
-          result.description;
-
-      }
-
-
-      message.innerText =
-        "❌ " + errorText;
-
-    })
-
-
-    .finally(function() {
-
-      button.disabled = false;
-
-      button.innerText =
-        "▶️ Watch Ad";
-
-    });
+  } catch (error) {
+    console.error("Monetag Ad Error:", error);
+    message.innerText = "❌ বিজ্ঞাপনটি শেষ পর্যন্ত দেখা হয়নি বা কোনো সমস্যা হয়েছে।";
+  } finally {
+    button.disabled = false;
+    button.innerText = "▶️ Watch Ad";
+  }
 
 }
 
@@ -1016,8 +839,6 @@ function home() {
 /* =========================
    START APP
 ========================= */
-
-initializeAdsGram();
 
 loadUser();
 
