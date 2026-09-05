@@ -106,10 +106,6 @@
       box-shadow: 0 5px 18px #00000008;
     }
 
-    .card:active {
-      transform: scale(.98);
-    }
-
     .icon {
       font-size: 24px;
       margin-bottom: 10px;
@@ -229,7 +225,7 @@
 
     <div class="balance-box">
       <div class="balance-title">Available Balance</div>
-      <div class="balance" id="balance">৳ 0.00</div>
+      <div class="balance" id="balance">Loading...</div>
       <button class="withdraw" onclick="withdraw()">💸 Withdraw</button>
     </div>
   </div>
@@ -261,6 +257,7 @@
     </div>
 
     <div class="tasks" id="taskSection">
+
       <div class="title">🎯 Available Tasks</div>
 
       <div class="task">
@@ -272,44 +269,6 @@
         <p>Join our Telegram channel and complete the task.</p>
 
         <button class="start" onclick="startTask(this,'https://t.me/FairEarnChannel')">
-          Start Task
-        </button>
-
-        <button class="verify" onclick="verifyTask(this,5)">
-          ✓ Verify & Claim
-        </button>
-
-        <button class="completed">✓ Completed</button>
-      </div>
-
-      <div class="task">
-        <div class="task-top">
-          <h3>▶️ Subscribe YouTube</h3>
-          <div class="reward">+৳10</div>
-        </div>
-
-        <p>Subscribe to the YouTube channel and claim your reward.</p>
-
-        <button class="start" onclick="startTask(this,'https://youtube.com')">
-          Start Task
-        </button>
-
-        <button class="verify" onclick="verifyTask(this,10)">
-          ✓ Verify & Claim
-        </button>
-
-        <button class="completed">✓ Completed</button>
-      </div>
-
-      <div class="task">
-        <div class="task-top">
-          <h3>👍 Facebook Follow</h3>
-          <div class="reward">+৳5</div>
-        </div>
-
-        <p>Follow our Facebook page and complete this task.</p>
-
-        <button class="start" onclick="startTask(this,'https://facebook.com')">
           Start Task
         </button>
 
@@ -348,114 +307,182 @@
   </div>
 
 <script>
+
 const tg = window.Telegram.WebApp;
+
 const API = "https://fairearn-api.xline320.workers.dev";
 
 tg.ready();
 tg.expand();
 
-let balance = Number(localStorage.getItem("fairearn_balance") || 0);
+let balance = 0;
 
-function updateBalance() {
-  document.getElementById("balance").innerText = "৳ " + balance.toFixed(2);
-  localStorage.setItem("fairearn_balance", balance);
+async function loadUser() {
+
+  const user = tg.initDataUnsafe.user;
+
+  if (!user) {
+    document.getElementById("balance").innerText = "৳ 0.00";
+    return;
+  }
+
+  try {
+
+    const response = await fetch(
+      API + "/api/me?telegram_id=" + user.id
+    );
+
+    const data = await response.json();
+
+    if (data.success && data.user) {
+
+      balance = Number(data.user.balance || 0);
+
+      document.getElementById("balance").innerText =
+        "৳ " + balance.toFixed(2);
+
+    } else {
+
+      document.getElementById("balance").innerText = "৳ 0.00";
+
+    }
+
+  } catch (error) {
+
+    document.getElementById("balance").innerText = "৳ 0.00";
+
+  }
 }
 
-updateBalance();
+loadUser();
+
+
+function updateBalance() {
+
+  document.getElementById("balance").innerText =
+    "৳ " + balance.toFixed(2);
+
+}
+
 
 function startTask(button, url) {
+
   const task = button.parentElement;
   const verify = task.querySelector(".verify");
 
-  if (tg.openLink) {
-    tg.openLink(url);
-  } else {
-    window.open(url, "_blank");
-  }
+  tg.openLink(url);
 
   button.style.display = "none";
   verify.style.display = "inline-block";
+
 }
+
 
 function verifyTask(button, reward) {
-  const task = button.parentElement;
-  const completed = task.querySelector(".completed");
 
-  balance += reward;
-  updateBalance();
+  tg.showAlert(
+    "⚠️ এখনো আসল Task Verification চালু হয়নি।"
+  );
 
-  button.style.display = "none";
-  completed.style.display = "inline-block";
-
-  tg.showAlert("🎉 Task completed!\n\nReward +৳" + reward + " যোগ হয়েছে।");
 }
 
+
 function showTasks() {
+
   document.getElementById("taskSection").scrollIntoView({
     behavior: "smooth"
   });
+
 }
 
+
 function invite() {
+
   const user = tg.initDataUnsafe.user;
+
   const id = user ? user.id : "user";
 
-  const link = "https://t.me/FairnjBot?start=ref_" + id;
+  const link =
+    "https://t.me/FairnjBot?start=ref_" + id;
 
   const share =
     "https://t.me/share/url?url=" +
     encodeURIComponent(link) +
     "&text=" +
-    encodeURIComponent("⭐ FairEarn Bot-এ যোগ দিন এবং Earn করুন!");
+    encodeURIComponent(
+      "⭐ FairEarn Bot-এ যোগ দিন এবং Earn করুন!"
+    );
 
-  if (tg.openTelegramLink) {
-    tg.openTelegramLink(share);
-  } else {
-    window.open(share, "_blank");
-  }
+  tg.openTelegramLink(share);
+
 }
+
 
 function statistics() {
+
   tg.showAlert(
     "📊 Statistics\n\n" +
-    "💰 Balance: ৳" + balance.toFixed(2)
+    "💰 Balance: ৳" +
+    balance.toFixed(2)
   );
+
 }
 
+
 function profile() {
+
   const user = tg.initDataUnsafe.user;
 
   if (!user) {
-    tg.showAlert("Telegram profile information পাওয়া যায়নি।");
+
+    tg.showAlert(
+      "Telegram profile information পাওয়া যায়নি।"
+    );
+
     return;
   }
 
   tg.showAlert(
     "👤 My Profile\n\n" +
-    "Name: " + (user.first_name || "") +
-    "\nUsername: @" + (user.username || "Not set") +
-    "\nTelegram ID: " + user.id
+    "Name: " +
+    (user.first_name || "") +
+    "\nUsername: @" +
+    (user.username || "Not set") +
+    "\nTelegram ID: " +
+    user.id
   );
+
 }
 
+
 function withdraw() {
+
   if (balance < 50) {
+
     tg.showAlert(
       "💸 Minimum Withdraw ৳50\n\nবর্তমান Balance: ৳" +
       balance.toFixed(2)
     );
+
     return;
   }
 
-  tg.showAlert("💸 Withdraw system শিগগিরই চালু হবে।");
+  tg.showAlert(
+    "💸 Withdraw system শিগগিরই চালু হবে।"
+  );
+
 }
 
+
 function home() {
+
   window.scrollTo({
     top: 0,
     behavior: "smooth"
   });
+
 }
+
 </script>
 
 </body>
