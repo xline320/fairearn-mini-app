@@ -3,15 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <title>FairEarn Bot ⭐</title>
-
-  <!-- Telegram Mini App -->
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
-
-  <!-- Monetag SDK -->
   <script src='//libtl.com/sdk.js' data-zone='11732184' data-sdk='show_11732184'></script>
-
   <style>
     * {
       box-sizing: border-box;
@@ -129,8 +123,53 @@
       line-height: 1.4;
     }
 
-    /* ADS */
+    /* TELEGRAM CHANNEL SECTION */
+    .tg-channel-card {
+      background: white;
+      border-radius: 18px;
+      padding: 18px;
+      margin-top: 18px;
+      box-shadow: 0 5px 18px #00000008;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
 
+    .tg-channel-info {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .tg-channel-info .icon {
+      font-size: 28px;
+      margin-bottom: 0;
+    }
+
+    .tg-channel-info h3 {
+      font-size: 15px;
+    }
+
+    .tg-channel-info p {
+      color: #7c8494;
+      font-size: 12px;
+      margin-top: 3px;
+    }
+
+    .join-btn {
+      border: 0;
+      border-radius: 12px;
+      padding: 10px 16px;
+      background: #0088cc;
+      color: white;
+      font-weight: bold;
+      font-size: 13px;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    /* ADS */
     .ad-section {
       margin-top: 24px;
     }
@@ -171,7 +210,6 @@
     }
 
     /* TASKS */
-
     .tasks {
       margin-top: 24px;
     }
@@ -220,7 +258,6 @@
     }
 
     /* BOTTOM NAV */
-
     .bottom {
       position: fixed;
       bottom: 0;
@@ -265,16 +302,11 @@
     }
   </style>
 </head>
-
 <body>
 
-  <!-- HEADER -->
-
   <div class="header">
-
     <div class="brand">
       <div class="logo">⭐</div>
-
       <div>
         <h1>FairEarn Bot</h1>
         <p>Earn • Invite • Reward</p>
@@ -282,34 +314,16 @@
     </div>
 
     <div class="balance-box">
-
-      <div class="balance-title">
-        Available Balance
-      </div>
-
-      <div class="balance" id="balance">
-        Loading...
-      </div>
-
-      <button class="withdraw" onclick="withdraw()">
-        💸 Withdraw
-      </button>
-
+      <div class="balance-title">Available Balance</div>
+      <div class="balance" id="balance">Loading...</div>
+      <button class="withdraw" onclick="withdraw()">💸 Withdraw</button>
     </div>
-
   </div>
 
-
   <div class="container">
-
-    <!-- QUICK ACTION -->
-
-    <div class="title">
-      Quick Actions
-    </div>
+    <div class="title">Quick Actions</div>
 
     <div class="grid">
-
       <div class="card" onclick="invite()">
         <div class="icon">👥</div>
         <h3>Invite & Earn</h3>
@@ -327,113 +341,71 @@
         <h3>Statistics</h3>
         <p>View your earnings</p>
       </div>
-
     </div>
 
-
-    <!-- ADS -->
-
-    <div class="ad-section">
-
-      <div class="title">
-        📺 Watch & Earn
-      </div>
-
-      <div class="ad-card">
-
-        <h3>
-          🎁 Watch Ad & Earn
-        </h3>
-
-        <p id="adMessage">
-          বিজ্ঞাপনটি সম্পূর্ণ দেখুন এবং Reward (৳0.05) পান।
-        </p>
-
-        <button
-          class="watch-ad"
-          id="watchAdButton"
-          onclick="watchRewardAd()"
-        >
-          ▶️ Watch Ad
-        </button>
-
-      </div>
-
-    </div>
-
-
-    <!-- TASK -->
-
-    <div class="tasks" id="taskSection">
-
-      <div class="title">
-        🎯 Available Tasks
-      </div>
-
-      <div id="taskList">
-        <div class="loading">
-          Task loading...
+    <div class="tg-channel-card">
+      <div class="tg-channel-info">
+        <div class="icon">📢</div>
+        <div>
+          <h3>Our Telegram Channel</h3>
+          <p>সব আপডেট পেতে জয়েন করুন</p>
         </div>
       </div>
-
+      <button class="join-btn" onclick="openTelegramChannel()">Join Now</button>
     </div>
 
+    <div class="ad-section">
+      <div class="title">📺 Watch & Earn</div>
+      <div class="ad-card">
+        <h3>🎁 Watch Ad & Earn</h3>
+        <p id="adMessage">বিজ্ঞাপনটি সম্পূর্ণ দেখুন এবং Reward (৳0.05) পান।</p>
+        <button class="watch-ad" id="watchAdButton" onclick="watchRewardAd()">▶️ Watch Ad</button>
+      </div>
+    </div>
+
+    <div class="tasks" id="taskSection">
+      <div class="title">🎯 Available Tasks</div>
+      <div id="taskList">
+        <div class="loading">Task loading...</div>
+      </div>
+    </div>
   </div>
 
-
-  <!-- BOTTOM -->
-
   <div class="bottom">
-
     <div class="nav active" onclick="home()">
       <span>🏠</span>
       Home
     </div>
-
     <div class="nav" onclick="showTasks()">
       <span>🎯</span>
       Tasks
     </div>
-
     <div class="nav" onclick="invite()">
       <span>👥</span>
       Invite
     </div>
-
     <div class="nav" onclick="profile()">
       <span>👤</span>
       Profile
     </div>
-
   </div>
-
 
 <script>
 
-/* =========================
-   TELEGRAM
-========================= */
-
 const tg = window.Telegram.WebApp;
-
 tg.ready();
 tg.expand();
 
+const API = "https://fairearn-api.xline320.workers.dev";
 
-/* =========================
-   API
-========================= */
+/* TELEGRAM CHANNEL FUNCTION */
+function openTelegramChannel() {
+  // আপনার টেলিগ্রাম চ্যানেলের লিংক এখানে দিন
+  tg.openTelegramLink("https://t.me/FairnjBot"); 
+}
 
-const API =
-  "https://fairearn-api.xline320.workers.dev";
-
-
-/* =========================
-   WATCH AD (MONETAG)
-========================= */
-
+/* WATCH AD (MONETAG) */
 async function watchRewardAd() {
-
   const button = document.getElementById("watchAdButton");
   const message = document.getElementById("adMessage");
   const user = tg.initDataUnsafe.user;
@@ -448,15 +420,11 @@ async function watchRewardAd() {
   message.innerText = "🔄 বিজ্ঞাপন লোড হচ্ছে...";
 
   try {
-    // Monetag Ad প্রদর্শন
     await show_11732184();
-
-    // অ্যাড সফলভাবে দেখার পর
     message.innerText = "🎉 সফল! বিজ্ঞাপন সম্পূর্ণ দেখা হয়েছে।";
 
-    const rewardAmount = 0.05; // প্রতি কাজ/অ্যাড দেখার জন্য ৫ পয়সা (৳0.05)
+    const rewardAmount = 0.05;
 
-    // ব্যাকএন্ড সার্ভারে রিওয়ার্ড পাঠানোর চেষ্টা
     if (user) {
       try {
         await fetch(API + "/api/add-reward", {
@@ -472,7 +440,6 @@ async function watchRewardAd() {
       }
     }
 
-    // ফ্রন্টএন্ডের ব্যালেন্স আপডেট
     balance += rewardAmount;
     document.getElementById("balance").innerText = "৳ " + balance.toFixed(2);
 
@@ -485,366 +452,134 @@ async function watchRewardAd() {
     button.disabled = false;
     button.innerText = "▶️ Watch Ad";
   }
-
 }
 
-
-/* =========================
-   BALANCE
-========================= */
-
+/* BALANCE */
 let balance = 0;
 
-
 async function loadUser() {
-
-  const user =
-    tg.initDataUnsafe.user;
-
+  const user = tg.initDataUnsafe.user;
 
   if (!user) {
-
-    document.getElementById(
-      "balance"
-    ).innerText =
-      "৳ 0.00";
-
+    document.getElementById("balance").innerText = "৳ 0.00";
     return;
-
   }
-
 
   try {
+    const response = await fetch(API + "/api/me?telegram_id=" + user.id);
+    const data = await response.json();
 
-    const response =
-      await fetch(
-        API +
-        "/api/me?telegram_id=" +
-        user.id
-      );
-
-
-    const data =
-      await response.json();
-
-
-    if (
-      data.success &&
-      data.user
-    ) {
-
-      balance =
-        Number(
-          data.user.balance || 0
-        );
-
-
-      document.getElementById(
-        "balance"
-      ).innerText =
-        "৳ " +
-        balance.toFixed(2);
-
+    if (data.success && data.user) {
+      balance = Number(data.user.balance || 0);
+      document.getElementById("balance").innerText = "৳ " + balance.toFixed(2);
     }
-
+  } catch (error) {
+    document.getElementById("balance").innerText = "৳ 0.00";
   }
-
-  catch (error) {
-
-    document.getElementById(
-      "balance"
-    ).innerText =
-      "৳ 0.00";
-
-  }
-
 }
 
-
-/* =========================
-   TASKS
-========================= */
-
+/* TASKS */
 async function loadTasks() {
-
-  const taskList =
-    document.getElementById(
-      "taskList"
-    );
-
+  const taskList = document.getElementById("taskList");
 
   try {
+    const response = await fetch(API + "/api/tasks");
+    const data = await response.json();
 
-    const response =
-      await fetch(
-        API + "/api/tasks"
-      );
-
-
-    const data =
-      await response.json();
-
-
-    if (
-      !data.success ||
-      !Array.isArray(data.tasks)
-    ) {
-
-      taskList.innerHTML =
-        '<div class="error">Task load failed</div>';
-
+    if (!data.success || !Array.isArray(data.tasks)) {
+      taskList.innerHTML = '<div class="error">Task load failed</div>';
       return;
-
     }
 
-
-    if (
-      data.tasks.length === 0
-    ) {
-
-      taskList.innerHTML =
-        '<div class="loading">কোনো Task নেই।</div>';
-
+    if (data.tasks.length === 0) {
+      taskList.innerHTML = '<div class="loading">কোনো Task নেই।</div>';
       return;
-
     }
-
 
     taskList.innerHTML = "";
 
+    data.tasks.forEach(function(task) {
+      const div = document.createElement("div");
+      div.className = "task";
 
-    data.tasks.forEach(
-      function(task) {
+      div.innerHTML = `
+        <div class="task-top">
+          <h3>📢 ${escapeHtml(task.title)}</h3>
+          <div class="reward">+৳${Number(task.reward).toFixed(2)}</div>
+        </div>
+        <p>${escapeHtml(task.description || "")}</p>
+        <button class="start" onclick="startTask('${encodeURIComponent(task.url)}')">Start Task</button>
+      `;
 
-        const div =
-          document.createElement(
-            "div"
-          );
-
-
-        div.className =
-          "task";
-
-
-        div.innerHTML = `
-
-          <div class="task-top">
-
-            <h3>
-              📢 ${escapeHtml(task.title)}
-            </h3>
-
-            <div class="reward">
-              +৳${Number(task.reward).toFixed(2)}
-            </div>
-
-          </div>
-
-          <p>
-            ${escapeHtml(
-              task.description || ""
-            )}
-          </p>
-
-          <button
-            class="start"
-            onclick="startTask(
-              '${encodeURIComponent(task.url)}'
-            )"
-          >
-            Start Task
-          </button>
-
-        `;
-
-
-        taskList.appendChild(div);
-
-      }
-    );
-
+      taskList.appendChild(div);
+    });
+  } catch (error) {
+    taskList.innerHTML = '<div class="error">Task load failed</div>';
   }
-
-  catch (error) {
-
-    taskList.innerHTML =
-      '<div class="error">Task load failed</div>';
-
-  }
-
 }
 
-
 function escapeHtml(text) {
-
   return String(text)
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#039;");
-
 }
-
-
-/* =========================
-   TASK START
-========================= */
 
 function startTask(encodedUrl) {
-
-  const url =
-    decodeURIComponent(
-      encodedUrl
-    );
-
+  const url = decodeURIComponent(encodedUrl);
   tg.openLink(url);
-
 }
-
-
-/* =========================
-   INVITE
-========================= */
 
 function invite() {
-
-  const user =
-    tg.initDataUnsafe.user;
-
-
-  const id =
-    user ? user.id : "user";
-
-
-  const link =
-    "https://t.me/FairnjBot?start=ref_" +
-    id;
-
-
-  const share =
-    "https://t.me/share/url?url=" +
-    encodeURIComponent(link) +
-    "&text=" +
-    encodeURIComponent(
-      "⭐ FairEarn Bot-এ যোগ দিন এবং Earn করুন!"
-    );
-
-
+  const user = tg.initDataUnsafe.user;
+  const id = user ? user.id : "user";
+  const link = "https://t.me/FairnjBot?start=ref_" + id;
+  const share = "https://t.me/share/url?url=" + encodeURIComponent(link) + "&text=" + encodeURIComponent("⭐ FairEarn Bot-এ যোগ দিন এবং Earn করুন!");
   tg.openTelegramLink(share);
-
 }
-
-
-/* =========================
-   STATISTICS
-========================= */
 
 function statistics() {
-
-  tg.showAlert(
-    "📊 Statistics\n\n" +
-    "💰 Balance: ৳" +
-    balance.toFixed(2)
-  );
-
+  tg.showAlert("📊 Statistics\n\n💰 Balance: ৳" + balance.toFixed(2));
 }
 
-
-/* =========================
-   PROFILE
-========================= */
-
 function profile() {
-
-  const user =
-    tg.initDataUnsafe.user;
-
+  const user = tg.initDataUnsafe.user;
 
   if (!user) {
-
-    tg.showAlert(
-      "Telegram profile information পাওয়া যায়নি।"
-    );
-
+    tg.showAlert("Telegram profile information পাওয়া যায়নি।");
     return;
-
   }
-
 
   tg.showAlert(
     "👤 My Profile\n\n" +
-    "Name: " +
-    (user.first_name || "") +
-    "\nUsername: @" +
-    (user.username || "Not set") +
-    "\nTelegram ID: " +
-    user.id
+    "Name: " + (user.first_name || "") +
+    "\nUsername: @" + (user.username || "Not set") +
+    "\nTelegram ID: " + user.id
   );
-
 }
-
-
-/* =========================
-   WITHDRAW
-========================= */
 
 function withdraw() {
-
   if (balance < 50) {
-
-    tg.showAlert(
-      "💸 Minimum Withdraw ৳50\n\n" +
-      "বর্তমান Balance: ৳" +
-      balance.toFixed(2)
-    );
-
+    tg.showAlert("💸 Minimum Withdraw ৳50\n\nবর্তমান Balance: ৳" + balance.toFixed(2));
     return;
-
   }
 
-
-  tg.showAlert(
-    "💸 Withdraw system শিগগিরই চালু হবে।"
-  );
-
+  tg.showAlert("💸 Withdraw system শিগগিরই চালু হবে।");
 }
-
-
-/* =========================
-   NAVIGATION
-========================= */
 
 function showTasks() {
-
-  document
-    .getElementById("taskSection")
-    .scrollIntoView({
-      behavior: "smooth"
-    });
-
+  document.getElementById("taskSection").scrollIntoView({ behavior: "smooth" });
 }
-
 
 function home() {
-
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth"
-  });
-
+  window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
-
-/* =========================
-   START APP
-========================= */
-
 loadUser();
-
 loadTasks();
 
 </script>
-
 </body>
 </html>
