@@ -319,98 +319,114 @@
 
     <!-- QUICK ACTIONS -->
 
-    <div class="title">
-      Quick Actions
+<div class="title">
+  Quick Actions
+</div>
+
+<div class="grid">
+
+  <div class="card" onclick="invite()">
+
+    <div class="icon">
+      👥
     </div>
 
-    <div class="grid">
+    <h3>
+      Invite & Earn
+    </h3>
 
-      <div class="card" onclick="invite()">
+    <p>
+      Invite friends and earn
+    </p>
 
-        <div class="icon">
-          👥
-        </div>
-
-        <h3>
-          Invite & Earn
-        </h3>
-
-        <p>
-          Invite friends and earn
-        </p>
-
-      </div>
+  </div>
 
 
-      <div class="card" onclick="showTasks()">
+  <div class="card" onclick="showTasks()">
 
-        <div class="icon">
-          🎯
-        </div>
-
-        <h3>
-          Tasks
-        </h3>
-
-        <p>
-          Complete tasks & earn
-        </p>
-
-      </div>
-
-
-      <div class="card" onclick="statistics()">
-
-        <div class="icon">
-          📊
-        </div>
-
-        <h3>
-          Statistics
-        </h3>
-
-        <p>
-          View your earnings
-        </p>
-
-      </div>
-
+    <div class="icon">
+      🎯
     </div>
-<p>
-  View your earnings
-</p>
+
+    <h3>
+      Tasks
+    </h3>
+
+    <p>
+      Complete tasks & earn
+    </p>
+
+  </div>
+
+
+  <div class="card" onclick="statistics()">
+
+    <div class="icon">
+      📊
+    </div>
+
+    <h3>
+      Statistics
+    </h3>
+
+    <p>
+      View your earnings
+    </p>
+
+  </div>
+
+
+  <!-- JOIN TELEGRAM -->
+
+  <div class="card" onclick="joinTelegram()">
+
+    <div class="icon">
+      📢
+    </div>
+
+    <h3>
+      Join Telegram
+    </h3>
+
+    <p>
+      Join our Telegram Channel
+    </p>
+
+  </div>
 
 </div>
 
 
-<!-- JOIN TELEGRAM -->
+<!-- ADS -->
 
 <div class="ad-section">
 
   <div class="title">
-    📢 Join Telegram
+    📺 Watch & Earn
   </div>
 
   <div class="ad-card">
 
-    <h3>⭐ FairEarn Telegram Channel</h3>
+    <h3>
+      🎁 Watch Ad & Earn
+    </h3>
 
-    <p>
-      আমাদের Telegram Channel-এ Join করুন।
+    <p id="adMessage">
+      বিজ্ঞাপনটি সম্পূর্ণ দেখুন এবং Reward (৳0.05) পান।
     </p>
 
     <button
       class="watch-ad"
-      onclick="joinTelegram()">
+      id="watchAdButton"
+      onclick="watchRewardAd()">
 
-      📲 Join Telegram
+      ▶️ Watch Ad
 
     </button>
 
   </div>
 
 </div>
-
 
 <!-- ADS -->
 
