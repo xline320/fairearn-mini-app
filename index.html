@@ -404,7 +404,7 @@ const API = "https://fairearn-api.xline320.workers.dev";
 
 /* TELEGRAM CHANNEL FUNCTION */
 function openTelegramChannel() {
-  const channelUrl = "https://t.me/FairnjBot";
+  const channelUrl = "https://t.me/FairEarnChannel";
   if (tg && tg.openTelegramLink) {
     tg.openTelegramLink(channelUrl);
   } else {
@@ -477,7 +477,6 @@ async function loadUser() {
     return;
   }
 
-  // 4 সেকেন্ডের টাইমআউট যুক্ত করা হলো যাতে নেটওয়ার্ক সমস্যার কারণে আটকে না থাকে
   const controller = new AbortController();
   const timeoutId = setTimeout(() => controller.abort(), 4000);
 
@@ -530,91 +529,4 @@ async function loadTasks() {
       `;
 
       taskList.appendChild(div);
-    });
-  } catch (error) {
-    taskList.innerHTML = '<div class="loading">কোনো Task নেই।</div>';
-  }
-}
-
-function escapeHtml(text) {
-  return String(text)
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#039;");
-}
-
-function startTask(encodedUrl) {
-  const url = decodeURIComponent(encodedUrl);
-  if (tg && tg.openLink) {
-    tg.openLink(url);
-  } else {
-    window.open(url, "_blank");
-  }
-}
-
-function invite() {
-  const user = (tg && tg.initDataUnsafe) ? tg.initDataUnsafe.user : null;
-  const id = user ? user.id : "user";
-  const link = "https://t.me/FairnjBot?start=ref_" + id;
-  const share = "https://t.me/share/url?url=" + encodeURIComponent(link) + "&text=" + encodeURIComponent("⭐ FairEarn Bot-এ যোগ দিন এবং Earn করুন!");
-  if (tg && tg.openTelegramLink) {
-    tg.openTelegramLink(share);
-  } else {
-    window.open(share, "_blank");
-  }
-}
-
-function statistics() {
-  const msg = "📊 Statistics\n\n💰 Balance: ৳" + balance.toFixed(2);
-  if (tg && tg.showAlert) tg.showAlert(msg);
-  else alert(msg);
-}
-
-function profile() {
-  const user = (tg && tg.initDataUnsafe) ? tg.initDataUnsafe.user : null;
-
-  if (!user) {
-    const msg = "Telegram profile information পাওয়া যায়নি।";
-    if (tg && tg.showAlert) tg.showAlert(msg);
-    else alert(msg);
-    return;
-  }
-
-  const profileInfo = "👤 My Profile\n\n" +
-    "Name: " + (user.first_name || "") +
-    "\nUsername: @" + (user.username || "Not set") +
-    "\nTelegram ID: " + user.id;
-
-  if (tg && tg.showAlert) tg.showAlert(profileInfo);
-  else alert(profileInfo);
-}
-
-function withdraw() {
-  if (balance < 50) {
-    const msg = "💸 Minimum Withdraw ৳50\n\nবর্তমান Balance: ৳" + balance.toFixed(2);
-    if (tg && tg.showAlert) tg.showAlert(msg);
-    else alert(msg);
-    return;
-  }
-
-  const msg = "💸 Withdraw system শিগগিরই চালু হবে।";
-  if (tg && tg.showAlert) tg.showAlert(msg);
-  else alert(msg);
-}
-
-function showTasks() {
-  document.getElementById("taskSection").scrollIntoView({ behavior: "smooth" });
-}
-
-function home() {
-  window.scrollTo({ top: 0, behavior: "smooth" });
-}
-
-loadUser();
-loadTasks();
-
-</script>
-</body>
-</html>
+  
