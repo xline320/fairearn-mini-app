@@ -394,16 +394,18 @@
 
 <script>
 
-const tg = window.Telegram.WebApp;
-tg.ready();
-tg.expand();
+const tg = window.Telegram ? window.Telegram.WebApp : null;
+if (tg) {
+  tg.ready();
+  tg.expand();
+}
 
 const API = "https://fairearn-api.xline320.workers.dev";
 
 /* TELEGRAM CHANNEL FUNCTION */
 function openTelegramChannel() {
   const channelUrl = "https://t.me/FairnjBot";
-  if (tg.openTelegramLink) {
+  if (tg && tg.openTelegramLink) {
     tg.openTelegramLink(channelUrl);
   } else {
     window.open(channelUrl, "_blank");
@@ -414,7 +416,7 @@ function openTelegramChannel() {
 async function watchRewardAd() {
   const button = document.getElementById("watchAdButton");
   const message = document.getElementById("adMessage");
-  const user = tg.initDataUnsafe.user;
+  const user = (tg && tg.initDataUnsafe) ? tg.initDataUnsafe.user : null;
 
   if (typeof show_11732184 !== 'function') {
     message.innerText = "⏳ Ad system লোড হচ্ছে, কিছুক্ষণ পর চেষ্টা করুন...";
@@ -449,7 +451,11 @@ async function watchRewardAd() {
     balance += rewardAmount;
     document.getElementById("balance").innerText = "৳ " + balance.toFixed(2);
 
-    tg.showAlert(`🎉 বিজ্ঞাপন দেখার জন্য আপনি ৳${rewardAmount.toFixed(2)} (৫ পয়সা) পেয়েছেন!`);
+    if (tg && tg.showAlert) {
+      tg.showAlert(`🎉 বিজ্ঞাপন দেখার জন্য আপনি ৳${rewardAmount.toFixed(2)} (৫ পয়সা) পেয়েছেন!`);
+    } else {
+      alert(`🎉 বিজ্ঞাপন দেখার জন্য আপনি ৳${rewardAmount.toFixed(2)} (৫ পয়সা) পেয়েছেন!`);
+    }
 
   } catch (error) {
     console.error("Monetag Ad Error:", error);
@@ -464,20 +470,27 @@ async function watchRewardAd() {
 let balance = 0;
 
 async function loadUser() {
-  const user = tg.initDataUnsafe.user;
+  const user = (tg && tg.initDataUnsafe) ? tg.initDataUnsafe.user : null;
 
   if (!user) {
     document.getElementById("balance").innerText = "৳ 0.00";
     return;
   }
 
+  // 4 সেকেন্ডের টাইমআউট যুক্ত করা হলো যাতে নেটওয়ার্ক সমস্যার কারণে আটকে না থাকে
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), 4000);
+
   try {
-    const response = await fetch(API + "/api/me?telegram_id=" + user.id);
+    const response = await fetch(API + "/api/me?telegram_id=" + user.id, { signal: controller.signal });
+    clearTimeout(timeoutId);
     const data = await response.json();
 
     if (data.success && data.user) {
       balance = Number(data.user.balance || 0);
       document.getElementById("balance").innerText = "৳ " + balance.toFixed(2);
+    } else {
+      document.getElementById("balance").innerText = "৳ 0.00";
     }
   } catch (error) {
     document.getElementById("balance").innerText = "৳ 0.00";
@@ -488,16 +501,15 @@ async function loadUser() {
 async function loadTasks() {
   const taskList = document.getElementById("taskList");
 
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), 4000);
+
   try {
-    const response = await fetch(API + "/api/tasks");
+    const response = await fetch(API + "/api/tasks", { signal: controller.signal });
+    clearTimeout(timeoutId);
     const data = await response.json();
 
-    if (!data.success || !Array.isArray(data.tasks)) {
-      taskList.innerHTML = '<div class="error">Task load failed</div>';
-      return;
-    }
-
-    if (data.tasks.length === 0) {
+    if (!data.success || !Array.isArray(data.tasks) || data.tasks.length === 0) {
       taskList.innerHTML = '<div class="loading">কোনো Task নেই।</div>';
       return;
     }
@@ -520,7 +532,7 @@ async function loadTasks() {
       taskList.appendChild(div);
     });
   } catch (error) {
-    taskList.innerHTML = '<div class="error">Task load failed</div>';
+    taskList.innerHTML = '<div class="loading">কোনো Task নেই।</div>';
   }
 }
 
@@ -535,27 +547,74 @@ function escapeHtml(text) {
 
 function startTask(encodedUrl) {
   const url = decodeURIComponent(encodedUrl);
-  tg.openLink(url);
+  if (tg && tg.openLink) {
+    tg.openLink(url);
+  } else {
+    window.open(url, "_blank");
+  }
 }
 
 function invite() {
-  const user = tg.initDataUnsafe.user;
+  const user = (tg && tg.initDataUnsafe) ? tg.initDataUnsafe.user : null;
   const id = user ? user.id : "user";
   const link = "https://t.me/FairnjBot?start=ref_" + id;
   const share = "https://t.me/share/url?url=" + encodeURIComponent(link) + "&text=" + encodeURIComponent("⭐ FairEarn Bot-এ যোগ দিন এবং Earn করুন!");
-  tg.openTelegramLink(share);
+  if (tg && tg.openTelegramLink) {
+    tg.openTelegramLink(share);
+  } else {
+    window.open(share, "_blank");
+  }
 }
 
 function statistics() {
-  tg.showAlert("📊 Statistics\n\n💰 Balance: ৳" + balance.toFixed(2));
+  const msg = "📊 Statistics\n\n💰 Balance: ৳" + balance.toFixed(2);
+  if (tg && tg.showAlert) tg.showAlert(msg);
+  else alert(msg);
 }
 
 function profile() {
-  const user = tg.initDataUnsafe.user;
+  const user = (tg && tg.initDataUnsafe) ? tg.initDataUnsafe.user : null;
 
   if (!user) {
-    tg.showAlert("Telegram profile information পাওয়া যায়নি।");
+    const msg = "Telegram profile information পাওয়া যায়নি।";
+    if (tg && tg.showAlert) tg.showAlert(msg);
+    else alert(msg);
     return;
   }
 
-  tg.showAlert
+  const profileInfo = "👤 My Profile\n\n" +
+    "Name: " + (user.first_name || "") +
+    "\nUsername: @" + (user.username || "Not set") +
+    "\nTelegram ID: " + user.id;
+
+  if (tg && tg.showAlert) tg.showAlert(profileInfo);
+  else alert(profileInfo);
+}
+
+function withdraw() {
+  if (balance < 50) {
+    const msg = "💸 Minimum Withdraw ৳50\n\nবর্তমান Balance: ৳" + balance.toFixed(2);
+    if (tg && tg.showAlert) tg.showAlert(msg);
+    else alert(msg);
+    return;
+  }
+
+  const msg = "💸 Withdraw system শিগগিরই চালু হবে।";
+  if (tg && tg.showAlert) tg.showAlert(msg);
+  else alert(msg);
+}
+
+function showTasks() {
+  document.getElementById("taskSection").scrollIntoView({ behavior: "smooth" });
+}
+
+function home() {
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+loadUser();
+loadTasks();
+
+</script>
+</body>
+</html>
