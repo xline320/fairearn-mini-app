@@ -149,7 +149,7 @@ async function loadUser() {
   }
 
   try {
-    const res = await fetch(API + "/api/me?telegram_id=" + user.id);
+    const res = await fetch(API + "/api/me?telegram_id=" + String(user.id));
     const data = await res.json();
     if (data.success && data.user) {
       balance = Number(data.user.balance || 0);
@@ -167,6 +167,11 @@ async function watchRewardAd() {
   const message = document.getElementById("adMessage");
   const user = (tg && tg.initDataUnsafe) ? tg.initDataUnsafe.user : null;
 
+  if (!user) {
+    alert("Telegram প্রোফাইল ডিটেক্ট হয়নি! Telegram অ্যাপের ভেতর থেকে অপেন করুন।");
+    return;
+  }
+
   if (typeof show_11732184 !== 'function') {
     message.innerText = "⏳ Ad system লোড হচ্ছে, কিছুক্ষণ পর চেষ্টা করুন...";
     return;
@@ -179,21 +184,28 @@ async function watchRewardAd() {
     await show_11732184();
     const rewardAmount = 0.05;
 
-    // ব্যাকএন্ড ডাটাবেসে সেভ করা
-    if (user) {
-      await fetch(API + "/api/add-reward", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ telegram_id: user.id, reward: rewardAmount })
-      });
+    message.innerText = "💾 ব্যালেন্স ডাটাবেসে সেভ হচ্ছে...";
+
+    // ডাটাবেসে টাকা যুক্ত করার রিকোয়েস্ট
+    const res = await fetch(API + "/api/add-reward", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ telegram_id: String(user.id), reward: rewardAmount })
+    });
+
+    const data = await res.json();
+
+    if (data.success) {
+      balance += rewardAmount;
+      document.getElementById("balance").innerText = "৳ " + balance.toFixed(2);
+      message.innerText = "🎉 সফল! বিজ্ঞাপন দেখা হয়েছে এবং ব্যালেন্স সেভ হয়েছে।";
+      if (tg && tg.showAlert) tg.showAlert("🎉 আপনার ব্যালেন্সে ৳0.05 যুক্ত হয়েছে!");
+    } else {
+      message.innerText = "❌ ব্যালেন্স ডাটাবেসে সেভ করা সম্ভব হয়নি!";
     }
 
-    balance += rewardAmount;
-    document.getElementById("balance").innerText = "৳ " + balance.toFixed(2);
-    message.innerText = "🎉 সফল! বিজ্ঞাপন সম্পূর্ণ দেখা হয়েছে।";
-    if (tg && tg.showAlert) tg.showAlert("🎉 আপনি ৳0.05 পেয়েছেন!");
   } catch (error) {
-    message.innerText = "❌ বিজ্ঞাপন দেখা সম্পন্ন হয়নি।";
+    message.innerText = "❌ বিজ্ঞাপন সম্পূর্ণ দেখা হয়নি।";
   } finally {
     button.disabled = false;
     button.innerText = "▶️ Watch Ad";
@@ -220,8 +232,12 @@ async function loadTasks() {
         `;
         taskList.appendChild(div);
       });
+    } else {
+      taskList.innerHTML = '<div class="loading">কোনো Task নেই।</div>';
     }
-  } catch (e) {}
+  } catch (e) {
+    taskList.innerHTML = '<div class="loading">কোনো Task নেই।</div>';
+  }
 }
 
 function invite() {
