@@ -167,6 +167,8 @@
       font-size: 13px;
       cursor: pointer;
       white-space: nowrap;
+      text-decoration: none;
+      display: inline-block;
     }
 
     /* ADS */
@@ -400,8 +402,12 @@ const API = "https://fairearn-api.xline320.workers.dev";
 
 /* TELEGRAM CHANNEL FUNCTION */
 function openTelegramChannel() {
-  // আপনার টেলিগ্রাম চ্যানেলের লিংক এখানে দিন
-  tg.openTelegramLink("https://t.me/FairnjBot"); 
+  const channelUrl = "https://t.me/FairnjBot";
+  if (tg.openTelegramLink) {
+    tg.openTelegramLink(channelUrl);
+  } else {
+    window.open(channelUrl, "_blank");
+  }
 }
 
 /* WATCH AD (MONETAG) */
@@ -552,34 +558,5 @@ function profile() {
     return;
   }
 
-  tg.showAlert(
-    "👤 My Profile\n\n" +
-    "Name: " + (user.first_name || "") +
-    "\nUsername: @" + (user.username || "Not set") +
-    "\nTelegram ID: " + user.id
-  );
-}
-
-function withdraw() {
-  if (balance < 50) {
-    tg.showAlert("💸 Minimum Withdraw ৳50\n\nবর্তমান Balance: ৳" + balance.toFixed(2));
-    return;
-  }
-
-  tg.showAlert("💸 Withdraw system শিগগিরই চালু হবে।");
-}
-
-function showTasks() {
-  document.getElementById("taskSection").scrollIntoView({ behavior: "smooth" });
-}
-
-function home() {
-  window.scrollTo({ top: 0, behavior: "smooth" });
-}
-
-loadUser();
-loadTasks();
-
-</script>
-</body>
-</html>
+  tg.showAlert
+  
