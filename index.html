@@ -292,7 +292,6 @@
 
     </div>
 
-
     <div class="balance-box">
 
       <div class="balance-title">
@@ -316,89 +315,110 @@
 
   <div class="container">
 
-
     <!-- QUICK ACTIONS -->
 
-<div class="title">
-  Quick Actions
-</div>
-
-<div class="grid">
-
-  <div class="card" onclick="invite()">
-
-    <div class="icon">
-      👥
+    <div class="title">
+      Quick Actions
     </div>
 
-    <h3>
-      Invite & Earn
-    </h3>
+    <div class="grid">
 
-    <p>
-      Invite friends and earn
-    </p>
+      <!-- INVITE -->
 
-  </div>
+      <div class="card" onclick="invite()">
+
+        <div class="icon">
+          👥
+        </div>
+
+        <h3>
+          Invite & Earn
+        </h3>
+
+        <p>
+          Invite friends and earn
+        </p>
+
+      </div>
 
 
-  <div class="card" onclick="showTasks()">
+      <!-- TASKS -->
 
-    <div class="icon">
-      🎯
+      <div class="card" onclick="showTasks()">
+
+        <div class="icon">
+          🎯
+        </div>
+
+        <h3>
+          Tasks
+        </h3>
+
+        <p>
+          Complete tasks & earn
+        </p>
+
+      </div>
+
+
+      <!-- STATISTICS -->
+
+      <div class="card" onclick="statistics()">
+
+        <div class="icon">
+          📊
+        </div>
+
+        <h3>
+          Statistics
+        </h3>
+
+        <p>
+          View your earnings
+        </p>
+
+      </div>
+
+
+      <!-- JOIN TELEGRAM -->
+
+      <div class="card" onclick="joinTelegram()">
+
+        <div class="icon">
+          📢
+        </div>
+
+        <h3>
+          Join Telegram
+        </h3>
+
+        <p>
+          Join our Telegram Channel
+        </p>
+
+      </div>
+
+
+      <!-- OFFER & EARN -->
+
+      <div class="card" onclick="openOfferwall()">
+
+        <div class="icon">
+          💰
+        </div>
+
+        <h3>
+          Offer & Earn
+        </h3>
+
+        <p>
+          Complete offers & earn coins
+        </p>
+
+      </div>
+
     </div>
 
-    <h3>
-      Tasks
-    </h3>
-
-    <p>
-      Complete tasks & earn
-    </p>
-
-  </div>
-
-
-  <div class="card" onclick="statistics()">
-
-    <div class="icon">
-      📊
-    </div>
-
-    <h3>
-      Statistics
-    </h3>
-
-    <p>
-      View your earnings
-    </p>
-
-  </div>
-
-
-  <!-- JOIN TELEGRAM -->
-
-  <div class="card" onclick="joinTelegram()">
-
-    <div class="icon">
-      📢
-    </div>
-
-    <h3>
-      Join Telegram
-    </h3>
-
-    <p>
-      Join our Telegram Channel
-    </p>
-
-  </div>
-
-</div>
-
-<!-- ADS -->
-
-<div class="ad-section">
 
     <!-- ADS -->
 
@@ -569,12 +589,8 @@
 
       try {
 
-        /* Monetag Ad */
-
         await show_11732184();
 
-
-        /* Reward */
 
         const rewardAmount =
           0.05;
@@ -583,8 +599,6 @@
         message.innerText =
           "🎉 সফল! বিজ্ঞাপন সম্পূর্ণ দেখা হয়েছে।";
 
-
-        /* Backend reward */
 
         if (user) {
 
@@ -658,16 +672,12 @@
         }
 
 
-        /* Update UI */
-
         document.getElementById(
           "balance"
         ).innerText =
           "৳ " +
           balance.toFixed(2);
 
-
-        /* Telegram alert */
 
         tg.showAlert(
           "🎉 বিজ্ঞাপন দেখার জন্য আপনি ৳" +
@@ -1144,37 +1154,63 @@
 
 
     /* =========================
+       JOIN TELEGRAM
+    ========================= */
+
+    function joinTelegram() {
+
+      tg.openTelegramLink(
+        "https://t.me/FairEarnChannel"
+      );
+
+    }
+
+
+    /* =========================
+       OFFERWALL.GG
+    ========================= */
+
+    function openOfferwall() {
+
+      const user =
+        tg.initDataUnsafe.user;
+
+
+      if (!user || !user.id) {
+
+        tg.showAlert(
+          "Telegram user information not loaded."
+        );
+
+        return;
+
+      }
+
+
+      const telegramId =
+        user.id;
+
+
+      const offerwallUrl =
+        "https://offerwall.gg/wall/aacebd8ad723ef3b4137e127194c40e4?userId=" +
+        encodeURIComponent(telegramId);
+
+
+      tg.openLink(
+        offerwallUrl
+      );
+
+    }
+
+
+    /* =========================
        START APP
     ========================= */
 
     loadUser();
 
     loadTasks();
-function joinTelegram() {
-  tg.openTelegramLink("https://t.me/FairEarnChannel");
-}
-    // =====================================================
-// OFFERWALL.GG
-// =====================================================
 
-function openOfferwall() {
-  if (!user || !user.id) {
-    alert("Telegram user information not loaded.");
-    return;
-  }
-
-  const telegramId = user.id;
-
-  const offerwallUrl =
-    "https://offerwall.gg/wall/aacebd8ad723ef3b4137e127194c40e4?userId=" +
-    encodeURIComponent(telegramId);
-
-  if (typeof tg !== "undefined" && tg.openLink) {
-    tg.openLink(offerwallUrl);
-  } else {
-    window.open(offerwallUrl, "_blank");
-  }
-}
   </script>
 
 </body>
