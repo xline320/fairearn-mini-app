@@ -1153,6 +1153,28 @@
 function joinTelegram() {
   tg.openTelegramLink("https://t.me/FairEarnChannel");
 }
+    // =====================================================
+// OFFERWALL.GG
+// =====================================================
+
+function openOfferwall() {
+  if (!user || !user.id) {
+    alert("Telegram user information not loaded.");
+    return;
+  }
+
+  const telegramId = user.id;
+
+  const offerwallUrl =
+    "https://offerwall.gg/wall/aacebd8ad723ef3b4137e127194c40e4?userId=" +
+    encodeURIComponent(telegramId);
+
+  if (typeof tg !== "undefined" && tg.openLink) {
+    tg.openLink(offerwallUrl);
+  } else {
+    window.open(offerwallUrl, "_blank");
+  }
+}
   </script>
 
 </body>
